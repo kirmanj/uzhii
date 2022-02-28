@@ -268,472 +268,483 @@ class _RepostsState extends State<Reposts> {
       body: Container(
         height: height,
         width: width,
-        child: Stack(
-          children: [
-            state == 0
-                ? Container(
-                    height: height,
-                    width: width,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        NeumorphicButton(
-                          child: Text(
-                            "    Profits   ",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              state = 1;
-                            });
-                          },
-                          style: NeumorphicStyle(
-                              color: Color.fromRGBO(235, 118, 189, 1)),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        NeumorphicButton(
-                          child: Text(
-                            "Costumers",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              state = 2;
-                              getCustomers();
-                            });
-                          },
-                          style: NeumorphicStyle(
-                              color: Color.fromRGBO(235, 118, 189, 1)),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        NeumorphicButton(
-                          child: Text(
-                            "  Products  ",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              state = 3;
-                            });
-                          },
-                          style: NeumorphicStyle(
-                              color: Color.fromRGBO(235, 118, 189, 1)),
-                        )
-                      ],
-                    ),
-                  )
-                : state == 1
-                    ? Container(
-                        width: width,
-                        height: height,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: height * 0.05,
-                            ),
-                            Text(
-                              "Profits",
+        child: SafeArea(
+          child: Stack(
+            children: [
+              state == 0
+                  ? Container(
+                      height: height,
+                      width: width,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          NeumorphicButton(
+                            child: Text(
+                              "    Profits   ",
                               style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                state = 1;
+                              });
+                            },
+                            style: NeumorphicStyle(
+                                color: Color.fromRGBO(235, 118, 189, 1)),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          NeumorphicButton(
+                            child: Text(
+                              "Costumers",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                state = 2;
+                                getCustomers();
+                              });
+                            },
+                            style: NeumorphicStyle(
+                                color: Color.fromRGBO(235, 118, 189, 1)),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          NeumorphicButton(
+                            child: Text(
+                              "  Products  ",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                state = 3;
+                              });
+                            },
+                            style: NeumorphicStyle(
+                                color: Color.fromRGBO(235, 118, 189, 1)),
+                          )
+                        ],
+                      ),
+                    )
+                  : state == 1
+                      ? Container(
+                          width: width,
+                          height: height,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: height * 0.02,
+                              ),
+                              Text(
+                                "Profits",
+                                style: TextStyle(
+                                    color: Color.fromRGBO(235, 118, 189, 1),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: height * 0.01,
+                              ),
+                              Neumorphic(
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  width: width * 0.9,
                                   color: Color.fromRGBO(235, 118, 189, 1),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: height * 0.01,
-                            ),
-                            Neumorphic(
-                              child: Container(
-                                padding: EdgeInsets.all(10),
-                                width: width * 0.9,
-                                color: Color.fromRGBO(235, 118, 189, 1),
-                                child: Text(
-                                  "Today:            " +
-                                      todayP.toString().replaceAllMapped(
-                                          RegExp(
-                                              r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-                                          (Match m) => '${m[1]},') +
-                                      " IQD",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: height * 0.01,
-                            ),
-                            Neumorphic(
-                              child: Container(
-                                padding: EdgeInsets.all(10),
-                                width: width * 0.9,
-                                color: Color.fromRGBO(235, 118, 189, 1),
-                                child: Text(
-                                  "This Week:    " +
-                                      lastWeek.toString().replaceAllMapped(
-                                          RegExp(
-                                              r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-                                          (Match m) => '${m[1]},') +
-                                      " IQD",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: height * 0.01,
-                            ),
-                            Neumorphic(
-                              child: Container(
-                                padding: EdgeInsets.all(10),
-                                width: width * 0.9,
-                                color: Color.fromRGBO(235, 118, 189, 1),
-                                child: Text(
-                                  "This Month:    " +
-                                      lastMonth.toString().replaceAllMapped(
-                                          RegExp(
-                                              r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-                                          (Match m) => '${m[1]},') +
-                                      " IQD",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: height * 0.01,
-                            ),
-                            Neumorphic(
-                              child: Container(
-                                padding: EdgeInsets.all(10),
-                                width: width * 0.9,
-                                color: Color.fromRGBO(235, 118, 189, 1),
-                                child: Text(
-                                  "This Year:    " +
-                                      lastYear.toString().replaceAllMapped(
-                                          RegExp(
-                                              r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-                                          (Match m) => '${m[1]},') +
-                                      " IQD",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: height * 0.001,
-                            ),
-                            Container(
-                              height: height * 0.57,
-                              child: ListView.builder(
-                                  itemCount: 12,
-                                  itemBuilder: (context, index) {
-                                    return Padding(
-                                      padding: EdgeInsets.all(5.0),
-                                      child: Container(
-                                        width: width * 0.1,
+                                  child: Text(
+                                    "Today:            " +
+                                        todayP.toString().replaceAllMapped(
+                                            RegExp(
+                                                r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                            (Match m) => '${m[1]},') +
+                                        " IQD",
+                                    style: TextStyle(
                                         color: Colors.white,
-                                        child: Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 15,
-                                            ),
-                                            isYearly
-                                                ? Container(
-                                                    width: width * 0.1,
-                                                    child: Text(
-                                                      monthlyProfit[index]
-                                                          ['month'],
-                                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: height * 0.01,
+                              ),
+                              Neumorphic(
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  width: width * 0.9,
+                                  color: Color.fromRGBO(235, 118, 189, 1),
+                                  child: Text(
+                                    "This Week:    " +
+                                        lastWeek.toString().replaceAllMapped(
+                                            RegExp(
+                                                r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                            (Match m) => '${m[1]},') +
+                                        " IQD",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: height * 0.01,
+                              ),
+                              Neumorphic(
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  width: width * 0.9,
+                                  color: Color.fromRGBO(235, 118, 189, 1),
+                                  child: Text(
+                                    "This Month:    " +
+                                        lastMonth.toString().replaceAllMapped(
+                                            RegExp(
+                                                r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                            (Match m) => '${m[1]},') +
+                                        " IQD",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: height * 0.01,
+                              ),
+                              Neumorphic(
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  width: width * 0.9,
+                                  color: Color.fromRGBO(235, 118, 189, 1),
+                                  child: Text(
+                                    "This Year:    " +
+                                        lastYear.toString().replaceAllMapped(
+                                            RegExp(
+                                                r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                            (Match m) => '${m[1]},') +
+                                        " IQD",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: height * 0.001,
+                              ),
+                              Container(
+                                height: height * 0.57,
+                                child: ListView.builder(
+                                    itemCount: 12,
+                                    itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding: EdgeInsets.all(5.0),
+                                        child: Container(
+                                          width: width * 0.1,
+                                          color: Colors.white,
+                                          child: Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 15,
+                                              ),
+                                              isYearly
+                                                  ? Container(
+                                                      width: width * 0.1,
+                                                      child: Text(
+                                                        monthlyProfit[index]
+                                                            ['month'],
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    235,
+                                                                    118,
+                                                                    189,
+                                                                    1)),
+                                                      ))
+                                                  : Container(
+                                                      width: width * 0.1,
+                                                      child: Text(
+                                                        yearlyProfit[index]
+                                                            ['month'],
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    235,
+                                                                    118,
+                                                                    189,
+                                                                    1)),
+                                                      ),
+                                                    ),
+                                              isYearly
+                                                  ? Neumorphic(
+                                                      style: NeumorphicStyle(
                                                           color: Color.fromRGBO(
                                                               235,
                                                               118,
                                                               189,
                                                               1)),
-                                                    ))
-                                                : Container(
-                                                    width: width * 0.1,
-                                                    child: Text(
-                                                      yearlyProfit[index]
-                                                          ['month'],
-                                                      style: TextStyle(
-                                                          color: Color.fromRGBO(
-                                                              235,
-                                                              118,
-                                                              189,
-                                                              1)),
-                                                    ),
-                                                  ),
-                                            isYearly
-                                                ? Neumorphic(
-                                                    style: NeumorphicStyle(
-                                                        color: Color.fromRGBO(
-                                                            235, 118, 189, 1)),
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsets.all(5.0),
-                                                      child: Container(
-                                                          width: monthlyProfit[index]['profit'] == 0
-                                                              ? width * 0.1
-                                                              : (((width * 0.6) *
-                                                                  ((monthlyProfit[index]['profit'] /
-                                                                      monthlyTotal)))),
-                                                          color: Color.fromRGBO(
-                                                              235, 118, 189, 1),
-                                                          child: Text(
-                                                              monthlyProfit[index]['profit'].toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},') +
-                                                                  " IQD",
-                                                              style: TextStyle(
-                                                                  fontSize: 12,
-                                                                  color: Colors
-                                                                      .white))),
-                                                    ),
-                                                  )
-                                                : Neumorphic(
-                                                    style: NeumorphicStyle(
-                                                        color: Color.fromRGBO(
-                                                            235, 118, 189, 1)),
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsets.all(5.0),
-                                                      child: Container(
-                                                          width: yearlyProfit[index]['profit'] == 0
-                                                              ? width * 0.1
-                                                              : (((width * 0.6) *
-                                                                  ((yearlyProfit[index]['profit'] /
-                                                                          yearlyTotal) +
-                                                                      0.1))),
-                                                          color: Color.fromRGBO(
-                                                              235, 118, 189, 1),
-                                                          child: Text(
-                                                              yearlyProfit[index]['profit']
-                                                                      .toString()
-                                                                      .replaceAllMapped(
-                                                                          RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-                                                                          (Match m) => '${m[1]},') +
-                                                                  " IQD",
-                                                              style: TextStyle(fontSize: 12, color: Colors.white))),
-                                                    ),
-                                                  ),
-                                          ],
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                NeumorphicButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      isYearly = !isYearly;
-                                    });
-                                  },
-                                  style: NeumorphicStyle(
-                                      color: isYearly
-                                          ? Colors.white
-                                          : Color.fromRGBO(235, 118, 189, 1)),
-                                  child: Text("Yearly",
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          color: !isYearly
-                                              ? Colors.white
-                                              : Color.fromRGBO(
-                                                  235, 118, 189, 1))),
-                                ),
-                                NeumorphicButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      isYearly = !isYearly;
-                                    });
-                                  },
-                                  style: NeumorphicStyle(
-                                      color: !isYearly
-                                          ? Colors.white
-                                          : Color.fromRGBO(235, 118, 189, 1)),
-                                  child: Text("Monthly",
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          color: isYearly
-                                              ? Colors.white
-                                              : Color.fromRGBO(
-                                                  235, 118, 189, 1))),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      )
-                    : state == 2
-                        ? Container(
-                            width: width,
-                            height: height,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: height * 0.05,
-                                ),
-                                Text(
-                                  "Costumers",
-                                  style: TextStyle(
-                                      color: Color.fromRGBO(235, 118, 189, 1),
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Container(
-                                  height: height * 0.8,
-                                  child: customers.length == 0
-                                      ? Container()
-                                      : ListView.builder(
-                                          itemCount: customers.length,
-                                          itemBuilder: (context, index) {
-                                            int max = 0;
-
-                                            for (int i = 0;
-                                                i < customers.length;
-                                                i++) {
-                                              print(customers[i]['total']);
-                                              if (customers[i]['total'] > max) {
-                                                max = customers[i]['total']
-                                                    .toInt();
-                                                indexMax = i;
-                                                print(indexMax);
-                                              }
-                                            }
-                                            return Padding(
-                                              padding: EdgeInsets.all(8.0),
-                                              child: Container(
-                                                color: Color.fromRGBO(
-                                                    235, 118, 189, 1),
-                                                child: Column(
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsets.all(4.0),
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceAround,
-                                                        children: [
-                                                          Text(
-                                                            customers[index]
-                                                                ['name'],
-                                                            style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                          ),
-                                                          Text(
-                                                            customers[index]
-                                                                ['phone'],
-                                                            style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                          ),
-                                                          Text(
-                                                            customers[index][
-                                                                        'total']
-                                                                    .toString()
-                                                                    .replaceAllMapped(
-                                                                        RegExp(
-                                                                            r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-                                                                        (Match m) =>
-                                                                            '${m[1]},') +
-                                                                " IQD",
-                                                            style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                          ),
-                                                          indexMax != index
-                                                              ? Container()
-                                                              : Icon(
-                                                                  Icons.star,
-                                                                  size: 18,
-                                                                  color: Colors
-                                                                      .yellow,
-                                                                )
-                                                        ],
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.all(5.0),
+                                                        child: Container(
+                                                            width: monthlyProfit[index]['profit'] == 0
+                                                                ? width * 0.1
+                                                                : (((width * 0.6) *
+                                                                    ((monthlyProfit[index]['profit'] /
+                                                                        monthlyTotal)))),
+                                                            color: Color.fromRGBO(
+                                                                235, 118, 189, 1),
+                                                            child: Text(
+                                                                monthlyProfit[index]['profit'].toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},') +
+                                                                    " IQD",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    color: Colors
+                                                                        .white))),
                                                       ),
                                                     )
-                                                  ],
-                                                ),
-                                              ),
-                                            );
-                                          }),
-                                )
-                              ],
-                            ),
-                          )
-                        : Container(
-                            width: width,
-                            height: height,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Products",
-                                  style: TextStyle(
-                                    color: Color.fromRGBO(235, 118, 189, 1),
+                                                  : Neumorphic(
+                                                      style: NeumorphicStyle(
+                                                          color: Color.fromRGBO(
+                                                              235,
+                                                              118,
+                                                              189,
+                                                              1)),
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.all(5.0),
+                                                        child: Container(
+                                                            width: yearlyProfit[index]['profit'] == 0
+                                                                ? width * 0.1
+                                                                : (((width * 0.6) *
+                                                                    ((yearlyProfit[index]['profit'] / yearlyTotal) +
+                                                                        0.1))),
+                                                            color: Color.fromRGBO(
+                                                                235, 118, 189, 1),
+                                                            child: Text(
+                                                                yearlyProfit[index]['profit'].toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},') +
+                                                                    " IQD",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    color: Colors
+                                                                        .white))),
+                                                      ),
+                                                    ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    }),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  NeumorphicButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        isYearly = !isYearly;
+                                      });
+                                    },
+                                    style: NeumorphicStyle(
+                                        color: isYearly
+                                            ? Colors.white
+                                            : Color.fromRGBO(235, 118, 189, 1)),
+                                    child: Text("Yearly",
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: !isYearly
+                                                ? Colors.white
+                                                : Color.fromRGBO(
+                                                    235, 118, 189, 1))),
                                   ),
-                                )
-                              ],
-                            ),
+                                  NeumorphicButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        isYearly = !isYearly;
+                                      });
+                                    },
+                                    style: NeumorphicStyle(
+                                        color: !isYearly
+                                            ? Colors.white
+                                            : Color.fromRGBO(235, 118, 189, 1)),
+                                    child: Text("Monthly",
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: isYearly
+                                                ? Colors.white
+                                                : Color.fromRGBO(
+                                                    235, 118, 189, 1))),
+                                  )
+                                ],
+                              )
+                            ],
                           ),
-            state == 0
-                ? Positioned(
-                    top: 25,
-                    left: 5,
-                    child: NeumorphicButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      style: NeumorphicStyle(shadowDarkColor: Colors.grey[200]),
-                      child: Icon(
-                        Icons.arrow_back_ios,
-                        size: 14,
-                        color: Color.fromRGBO(235, 118, 189, 1),
+                        )
+                      : state == 2
+                          ? Container(
+                              width: width,
+                              height: height,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: height * 0.05,
+                                  ),
+                                  Text(
+                                    "Costumers",
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(235, 118, 189, 1),
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Container(
+                                    height: height * 0.8,
+                                    child: customers.length == 0
+                                        ? Container()
+                                        : ListView.builder(
+                                            itemCount: customers.length,
+                                            itemBuilder: (context, index) {
+                                              int max = 0;
+
+                                              for (int i = 0;
+                                                  i < customers.length;
+                                                  i++) {
+                                                print(customers[i]['total']);
+                                                if (customers[i]['total'] >
+                                                    max) {
+                                                  max = customers[i]['total']
+                                                      .toInt();
+                                                  indexMax = i;
+                                                  print(indexMax);
+                                                }
+                                              }
+                                              return Padding(
+                                                padding: EdgeInsets.all(8.0),
+                                                child: Container(
+                                                  color: Color.fromRGBO(
+                                                      235, 118, 189, 1),
+                                                  child: Column(
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.all(4.0),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceAround,
+                                                          children: [
+                                                            Text(
+                                                              customers[index]
+                                                                  ['name'],
+                                                              style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              customers[index]
+                                                                  ['phone'],
+                                                              style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              customers[index][
+                                                                          'total']
+                                                                      .toString()
+                                                                      .replaceAllMapped(
+                                                                          RegExp(
+                                                                              r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                                                          (Match m) =>
+                                                                              '${m[1]},') +
+                                                                  " IQD",
+                                                              style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            ),
+                                                            indexMax != index
+                                                                ? Container()
+                                                                : Icon(
+                                                                    Icons.star,
+                                                                    size: 18,
+                                                                    color: Colors
+                                                                        .yellow,
+                                                                  )
+                                                          ],
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              );
+                                            }),
+                                  )
+                                ],
+                              ),
+                            )
+                          : Container(
+                              width: width,
+                              height: height,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Products",
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(235, 118, 189, 1),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+              state == 0
+                  ? Positioned(
+                      top: 5,
+                      left: 5,
+                      child: NeumorphicButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style:
+                            NeumorphicStyle(shadowDarkColor: Colors.grey[200]),
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          size: 14,
+                          color: Color.fromRGBO(235, 118, 189, 1),
+                        ),
+                      ),
+                    )
+                  : Positioned(
+                      top: 5,
+                      left: 5,
+                      child: NeumorphicButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style:
+                            NeumorphicStyle(shadowDarkColor: Colors.grey[200]),
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          size: 14,
+                          color: Color.fromRGBO(235, 118, 189, 1),
+                        ),
                       ),
                     ),
-                  )
-                : Positioned(
-                    top: 25,
-                    left: 5,
-                    child: NeumorphicButton(
-                      onPressed: () {
-                        setState(() {
-                          state = 0;
-                          // getData();
-                        });
-                      },
-                      style: NeumorphicStyle(shadowDarkColor: Colors.grey[200]),
-                      child: Icon(
-                        Icons.arrow_back_ios,
-                        size: 14,
-                        color: Color.fromRGBO(235, 118, 189, 1),
-                      ),
-                    ),
-                  ),
-          ],
+            ],
+          ),
         ),
       ),
     );
