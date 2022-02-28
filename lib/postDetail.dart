@@ -231,7 +231,7 @@ class _PostDetailState extends State<PostDetail> {
             Padding(
               padding: EdgeInsets.only(top: 8.0),
               child: Container(
-                height: height * 0.58,
+                height: height * 0.55,
                 child: post == null
                     ? Container()
                     : ListView.builder(

@@ -48,7 +48,7 @@ class _ProductsState extends State<Products> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.only(top: height * 0.01),
+
           child: Stack(
             children: [
               Row(
@@ -154,7 +154,7 @@ class _ProductsState extends State<Products> {
                   : (add || userRole != 1)
                       ? Container()
                       : Positioned(
-                          bottom: height * 0.03,
+                          bottom: height * 0.05,
                           right: width * 0.4,
                           child: Container(
                               height: height * 0.05,
@@ -363,7 +363,7 @@ class _ProductsState extends State<Products> {
                   : (!add)
                       ? Container()
                       : Positioned(
-                          bottom: height * 0.03,
+                          bottom: height * 0.06,
                           right: width * 0.4,
                           child: Container(
                               height: height * 0.05,

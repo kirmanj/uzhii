@@ -274,7 +274,7 @@ class _SellScreenState extends State<SellScreen> {
                                 ),
                               ),
                               Container(
-                                  height: height * 0.45,
+                                  height: height * 0.4,
                                   child: ListView.builder(
                                       scrollDirection: Axis.vertical,
                                       itemCount: sell["products"].length,
@@ -372,7 +372,7 @@ class _SellScreenState extends State<SellScreen> {
                                               );
                                       })),
                               Container(
-                                width: width * 0.8,
+                                width: width * 0.7,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
@@ -866,7 +866,7 @@ class _SellScreenState extends State<SellScreen> {
                                 (post == null)
                                     ? Container()
                                     : Container(
-                                        height: height * 0.47,
+                                        height: height * 0.44,
                                         padding:
                                             EdgeInsets.only(top: height * 0.02),
                                         child: ListView.builder(

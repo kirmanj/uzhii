@@ -20,7 +20,7 @@ class _PostsState extends State<Posts> {
 
     return Scaffold(
       body: SingleChildScrollView(
-        padding: EdgeInsets.only(top: height * 0.03),
+        //padding: EdgeInsets.only(top: height * 0.03),
         child: SafeArea(
           child: Stack(
             children: [
@@ -193,7 +193,7 @@ class _PostsState extends State<Posts> {
               (userRole != 1)
                   ? Container()
                   : Positioned(
-                      bottom: height * 0.03,
+                      bottom: height * 0.05,
                       right: width * 0.4,
                       child: Container(
                           height: height * 0.05,

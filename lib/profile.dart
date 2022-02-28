@@ -91,7 +91,8 @@ class _ProfileState extends State<Profile> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        padding: EdgeInsets.only(bottom: height * 0.1),
+
+                        padding: EdgeInsets.only(bottom: height * 0.2),
                         child: Column(
                           children: [
                             Container(
@@ -113,7 +114,7 @@ class _ProfileState extends State<Profile> {
                         ),
                       ),
                       Container(
-                        height: height * 0.4,
+                        height: height * 0.3,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -146,7 +147,7 @@ class _ProfileState extends State<Profile> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (ctx) => Reposts(
-                                              state: 1,
+                                              state: 2,
                                             )));
                               },
                               style: NeumorphicStyle(color: Colors.white),
@@ -267,7 +268,7 @@ class _ProfileState extends State<Profile> {
                     ],
                   ),
                   Positioned(
-                      bottom: height * 0.03,
+                      bottom: height * 0.07,
                       left: width * 0.35,
                       child: Container(
                         width: width * 0.3,

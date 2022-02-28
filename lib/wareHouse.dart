@@ -22,7 +22,7 @@ class _WareHouseState extends State<WareHouse> {
             children: [
               Neumorphic(
                 child: Container(
-                  height: height * 0.43,
+                  height: height * 0.40,
                   width: width * 0.95,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -50,7 +50,7 @@ class _WareHouseState extends State<WareHouse> {
                         ],
                       )),
                       Container(
-                        height: height * 0.39,
+                        height: height * 0.37,
                         child: StreamBuilder(
                           stream: FirebaseFirestore.instance
                               .collection('products')
@@ -138,7 +138,7 @@ class _WareHouseState extends State<WareHouse> {
               ),
               Neumorphic(
                 child: Container(
-                  height: height * 0.43,
+                  height: height * 0.40,
                   width: width * 0.95,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -165,7 +165,7 @@ class _WareHouseState extends State<WareHouse> {
                         ],
                       ),
                       Container(
-                        height: height * 0.39,
+                        height: height * 0.37,
                         child: StreamBuilder(
                           stream: FirebaseFirestore.instance
                               .collection('products')

@@ -143,7 +143,7 @@ class _PostScreenState extends State<PostScreen> {
             children: [
               SingleChildScrollView(
                 child: Container(
-                  margin: EdgeInsets.only(top: height * 0.03),
+
                   child: Container(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -168,7 +168,7 @@ class _PostScreenState extends State<PostScreen> {
                         ),
                         Container(
                           width: width * 0.95,
-                          height: height * 0.9,
+                          height: height * 0.8,
                           margin: EdgeInsets.only(
                               left: width * 0.025, top: height * 0.03),
                           child: Neumorphic(
@@ -527,17 +527,14 @@ class _PostScreenState extends State<PostScreen> {
                 ),
               ),
               Positioned(
-                bottom: height * 0.0,
-                right: width * 0.4,
+                top: height * 0.0,
+                left: width * 0.0,
                 child: Container(
-                    height: height * 0.05,
-                    width: width * 0.2,
+
                     child: NeumorphicButton(
-                      child: Center(
-                        child: Icon(
-                          Icons.close,
-                          color: Color.fromRGBO(235, 118, 189, 1),
-                        ),
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: Color.fromRGBO(235, 118, 189, 1),
                       ),
                       onPressed: () {
                         Navigator.pop(context);

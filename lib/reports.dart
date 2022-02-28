@@ -336,12 +336,12 @@ class _RepostsState extends State<Reposts> {
                   : state == 1
                       ? Container(
                           width: width,
-                          height: height,
+                          height: height*0.9,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               SizedBox(
-                                height: height * 0.02,
+                                height: height * 0.01,
                               ),
                               Text(
                                 "Profits",
@@ -351,7 +351,7 @@ class _RepostsState extends State<Reposts> {
                                     fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
-                                height: height * 0.01,
+                                height: height * 0.005,
                               ),
                               Neumorphic(
                                 child: Container(
@@ -372,7 +372,7 @@ class _RepostsState extends State<Reposts> {
                                 ),
                               ),
                               SizedBox(
-                                height: height * 0.01,
+                                height: height * 0.005,
                               ),
                               Neumorphic(
                                 child: Container(
@@ -393,7 +393,7 @@ class _RepostsState extends State<Reposts> {
                                 ),
                               ),
                               SizedBox(
-                                height: height * 0.01,
+                                height: height * 0.005,
                               ),
                               Neumorphic(
                                 child: Container(
@@ -414,7 +414,7 @@ class _RepostsState extends State<Reposts> {
                                 ),
                               ),
                               SizedBox(
-                                height: height * 0.01,
+                                height: height * 0.005,
                               ),
                               Neumorphic(
                                 child: Container(
@@ -438,7 +438,7 @@ class _RepostsState extends State<Reposts> {
                                 height: height * 0.001,
                               ),
                               Container(
-                                height: height * 0.57,
+                                height: height * 0.55,
                                 child: ListView.builder(
                                     itemCount: 12,
                                     itemBuilder: (context, index) {
@@ -606,7 +606,7 @@ class _RepostsState extends State<Reposts> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Container(
-                                    height: height * 0.8,
+                                    height: height * 0.7,
                                     child: customers.length == 0
                                         ? Container()
                                         : ListView.builder(
