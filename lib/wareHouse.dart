@@ -95,6 +95,8 @@ class _WareHouseState extends State<WareHouse> {
                                                   children: [
                                                     Text(
                                                       data.docs[index]["name"],
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
                                                       style: TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 16,
@@ -104,13 +106,13 @@ class _WareHouseState extends State<WareHouse> {
                                                           TextAlign.center,
                                                     ),
                                                     Text(
-                                                      data.docs[index]
-                                                                  ["priceP"]
+                                                      data.docs[index]["priceP"]
                                                               .toString() +
                                                           " Ld     " +
                                                           data.docs[index]
                                                                   ["priceI"]
-                                                              .toString() +
+                                                              .toStringAsFixed(
+                                                                  1) +
                                                           "  IQD  " +
                                                           "  Quantity  " +
                                                           data.docs[index]
@@ -210,6 +212,8 @@ class _WareHouseState extends State<WareHouse> {
                                                   children: [
                                                     Text(
                                                       data.docs[index]["name"],
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
                                                       style: TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 16,
@@ -219,13 +223,13 @@ class _WareHouseState extends State<WareHouse> {
                                                           TextAlign.center,
                                                     ),
                                                     Text(
-                                                      data.docs[index]
-                                                                  ["priceP"]
+                                                      data.docs[index]["priceP"]
                                                               .toString() +
                                                           " Ld     " +
                                                           data.docs[index]
                                                                   ["priceI"]
-                                                              .toString() +
+                                                              .toStringAsFixed(
+                                                                  1) +
                                                           "  IQD  " +
                                                           "  Quantity  " +
                                                           data.docs[index]

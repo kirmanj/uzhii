@@ -339,7 +339,7 @@ class _InvoicesState extends State<Invoices> {
                                               child: Text(
                                                 " Total:   " +
                                                     data.docs[index]['totalI']
-                                                        .toString() +
+                                                        .toStringAsFixed(1) +
                                                     " IQD  -  " +
                                                     data.docs[index]['totalP']
                                                         .toStringAsFixed(1) +
@@ -466,131 +466,87 @@ class _InvoicesState extends State<Invoices> {
                                 return data.docs[index]['state'] != 0
                                     ? Container()
                                     : Container(
-                                      margin: EdgeInsets.all(5),
-                                      child: new Neumorphic(
-                                        padding: EdgeInsets.only(left: 10),
-                                        style: NeumorphicStyle(
-                                            border: NeumorphicBorder(
-                                          color: Color.fromRGBO(
-                                              235, 118, 189, 1),
-                                        )),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceAround,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Icon(
-                                                      Icons.person,
-                                                      size: 18,
-                                                      color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
-                                                    ),
-                                                    Text(
-                                                      "  " +
-                                                          data.docs[index][
-                                                              'CustomerName'],
-                                                      style: TextStyle(
-                                                        color:
-                                                            Color.fromRGBO(
-                                                                235,
-                                                                118,
-                                                                189,
-                                                                1),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                Text(
-                                                  "Post Code: " +
-                                                      data.docs[index]
-                                                              ['code']
-                                                          .toString(),
-                                                  style: TextStyle(
-                                                    color: Color.fromRGBO(
-                                                        235, 118, 189, 1),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  " Invoice No: " +
-                                                      data.docs[index].id
-                                                          .toString()
-                                                          .substring(1, 7),
-                                                  style: TextStyle(
-                                                    color: Color.fromRGBO(
-                                                        235, 118, 189, 1),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                            Container(
-                                              padding: EdgeInsets.only(
-                                                  left: 10, right: 10),
-                                              child: Row(
+                                        margin: EdgeInsets.all(5),
+                                        child: new Neumorphic(
+                                          padding: EdgeInsets.only(left: 10),
+                                          style: NeumorphicStyle(
+                                              border: NeumorphicBorder(
+                                            color: Color.fromRGBO(
+                                                235, 118, 189, 1),
+                                          )),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.start,
+                                                    MainAxisAlignment
+                                                        .spaceAround,
                                                 children: [
                                                   Row(
                                                     children: [
                                                       Icon(
-                                                        Icons.phone,
+                                                        Icons.person,
                                                         size: 18,
-                                                        color:
-                                                            Color.fromRGBO(
-                                                                235,
-                                                                118,
-                                                                189,
-                                                                1),
+                                                        color: Color.fromRGBO(
+                                                            235, 118, 189, 1),
                                                       ),
                                                       Text(
                                                         "  " +
-                                                            data.docs[index]
-                                                                [
-                                                                'phoneNo2'],
+                                                            data.docs[index][
+                                                                'CustomerName'],
                                                         style: TextStyle(
-                                                          color: Color
-                                                              .fromRGBO(
-                                                                  235,
-                                                                  118,
-                                                                  189,
-                                                                  1),
+                                                          color: Color.fromRGBO(
+                                                              235, 118, 189, 1),
                                                         ),
                                                       )
                                                     ],
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.only(
-                                                      left: 10,
+                                                  Text(
+                                                    "Post Code: " +
+                                                        data.docs[index]['code']
+                                                            .toString(),
+                                                    style: TextStyle(
+                                                      color: Color.fromRGBO(
+                                                          235, 118, 189, 1),
                                                     ),
-                                                    child: Row(
+                                                  ),
+                                                  Text(
+                                                    " Invoice No: " +
+                                                        data.docs[index].id
+                                                            .toString()
+                                                            .substring(1, 7),
+                                                    style: TextStyle(
+                                                      color: Color.fromRGBO(
+                                                          235, 118, 189, 1),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              Container(
+                                                padding: EdgeInsets.only(
+                                                    left: 10, right: 10),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Row(
                                                       children: [
                                                         Icon(
                                                           Icons.phone,
                                                           size: 18,
-                                                          color: Color
-                                                              .fromRGBO(
-                                                                  235,
-                                                                  118,
-                                                                  189,
-                                                                  1),
+                                                          color: Color.fromRGBO(
+                                                              235, 118, 189, 1),
                                                         ),
                                                         Text(
                                                           "  " +
-                                                              data.docs[
-                                                                      index]
-                                                                  [
-                                                                  'phoneNo2'],
+                                                              data.docs[index]
+                                                                  ['phoneNo2'],
                                                           style: TextStyle(
-                                                            color: Color
-                                                                .fromRGBO(
+                                                            color:
+                                                                Color.fromRGBO(
                                                                     235,
                                                                     118,
                                                                     189,
@@ -599,172 +555,28 @@ class _InvoicesState extends State<Invoices> {
                                                         )
                                                       ],
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Container(
-                                              child: Row(
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.only(
-                                                            left: 10,
-                                                            right: 10),
-                                                    child: Icon(
-                                                      Icons
-                                                          .pin_drop_outlined,
-                                                      size: 18,
-                                                      color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Text(
-                                                      data.docs[index]
-                                                          ['address'],
-                                                      overflow: TextOverflow
-                                                          .ellipsis,
-                                                      style: TextStyle(
-                                                        color:
-                                                            Color.fromRGBO(
-                                                                235,
-                                                                118,
-                                                                189,
-                                                                1),
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                        left: 10,
                                                       ),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                            Container(
-                                              child: Row(
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.only(
-                                                            left: 10,
-                                                            right: 10),
-                                                    child: Icon(
-                                                      Icons.date_range,
-                                                      size: 18,
-                                                      color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Text(
-                                                      data.docs[index]
-                                                          ['sellingDate'],
-                                                      overflow: TextOverflow
-                                                          .ellipsis,
-                                                      style: TextStyle(
-                                                        color:
-                                                            Color.fromRGBO(
-                                                                235,
-                                                                118,
-                                                                189,
-                                                                1),
-                                                      ),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  padding: EdgeInsets.only(
-                                                      left: 10, right: 10),
-                                                  child: Text(
-                                                    " Products:  " +
-                                                        data.docs[index][
-                                                                'noOfProducts']
-                                                            .toString(),
-                                                    style: TextStyle(
-                                                      color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
-                                                    ),
-                                                  ),
-                                                ),
-                                                data.docs[index]['state'] ==
-                                                        0
-                                                    ? Text(
-                                                        "State: Not Delivered",
-                                                        style: TextStyle(
-                                                          color: Color
-                                                              .fromRGBO(
-                                                                  235,
-                                                                  118,
-                                                                  189,
-                                                                  1),
-                                                        ),
-                                                      )
-                                                    : Text(
-                                                        "State: Delivered",
-                                                        style: TextStyle(
-                                                          color: Color
-                                                              .fromRGBO(
-                                                                  235,
-                                                                  118,
-                                                                  189,
-                                                                  1),
-                                                        ),
-                                                      ),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  padding: EdgeInsets.only(
-                                                      left: 10, right: 10),
-                                                  child: Text(
-                                                    " Total:   " +
-                                                        data.docs[index]
-                                                                ['totalI']
-                                                            .toString() +
-                                                        " IQD  -  " +
-                                                        data.docs[index]
-                                                                ['totalP']
-                                                            .toStringAsFixed(
-                                                                1) +
-                                                        " Lb",
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Container(
-                                              padding: EdgeInsets.only(
-                                                  top: 10, bottom: 10),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                right: 8.0),
-                                                        child:
-                                                            NeumorphicButton(
-                                                          child: Text(
-                                                            "Detail",
-                                                            style:
-                                                                TextStyle(
-                                                              fontSize: 10,
+                                                      child: Row(
+                                                        children: [
+                                                          Icon(
+                                                            Icons.phone,
+                                                            size: 18,
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    235,
+                                                                    118,
+                                                                    189,
+                                                                    1),
+                                                          ),
+                                                          Text(
+                                                            "  " +
+                                                                data.docs[index]
+                                                                    [
+                                                                    'phoneNo2'],
+                                                            style: TextStyle(
                                                               color: Color
                                                                   .fromRGBO(
                                                                       235,
@@ -772,242 +584,359 @@ class _InvoicesState extends State<Invoices> {
                                                                       189,
                                                                       1),
                                                             ),
-                                                          ),
-                                                          onPressed: () {
-                                                            setState(() {
-                                                              btnAction = 3;
-
-                                                              currentDoc =
-                                                                  data.docs[
-                                                                      index];
-                                                            });
-                                                          },
-                                                          style: NeumorphicStyle(
-                                                              shadowDarkColor:
-                                                                  Colors
-                                                                      .black38,
-                                                              color: Colors
-                                                                  .white),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                child: Row(
+                                                  children: [
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                          left: 10, right: 10),
+                                                      child: Icon(
+                                                        Icons.pin_drop_outlined,
+                                                        size: 18,
+                                                        color: Color.fromRGBO(
+                                                            235, 118, 189, 1),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Text(
+                                                        data.docs[index]
+                                                            ['address'],
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                          color: Color.fromRGBO(
+                                                              235, 118, 189, 1),
                                                         ),
                                                       ),
-                                                      data.docs[index][
-                                                                  'state'] ==
-                                                              1
-                                                          ? Container()
-                                                          : Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      right:
-                                                                          8.0),
-                                                              child:
-                                                                  NeumorphicButton(
-                                                                child: Text(
-                                                                  "Cancle",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        10,
-                                                                    color: Color.fromRGBO(
-                                                                        235,
-                                                                        118,
-                                                                        189,
-                                                                        1),
-                                                                  ),
-                                                                ),
-                                                                onPressed:
-                                                                    () {
-                                                                  setState(
-                                                                      () {
-                                                                    btnAction =
-                                                                        1;
-                                                                    currentDoc =
-                                                                        data.docs[index];
-                                                                  });
-                                                                },
-                                                                style: NeumorphicStyle(
-                                                                    shadowDarkColor:
-                                                                        Colors
-                                                                            .black38,
-                                                                    color: Colors
-                                                                        .white),
-                                                              ),
-                                                            ),
-                                                      data.docs[index][
-                                                                  'state'] ==
-                                                              1
-                                                          ? Container()
-                                                          : NeumorphicButton(
-                                                              child: Text(
-                                                                "Done",
-                                                                style:
-                                                                    TextStyle(
-                                                                  fontSize:
-                                                                      10,
-                                                                  color: Colors
-                                                                      .white,
-                                                                ),
-                                                              ),
-                                                              onPressed:
-                                                                  () {
-                                                                setState(
-                                                                    () {
-                                                                  btnAction =
-                                                                      2;
-                                                                  currentDoc =
-                                                                      data.docs[
-                                                                          index];
-                                                                });
-                                                              },
-                                                              style:
-                                                                  NeumorphicStyle(
-                                                                shadowDarkColor:
-                                                                    Colors
-                                                                        .black38,
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                child: Row(
+                                                  children: [
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                          left: 10, right: 10),
+                                                      child: Icon(
+                                                        Icons.date_range,
+                                                        size: 18,
+                                                        color: Color.fromRGBO(
+                                                            235, 118, 189, 1),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Text(
+                                                        data.docs[index]
+                                                            ['sellingDate'],
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                          color: Color.fromRGBO(
+                                                              235, 118, 189, 1),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                        left: 10, right: 10),
+                                                    child: Text(
+                                                      " Products:  " +
+                                                          data.docs[index][
+                                                                  'noOfProducts']
+                                                              .toString(),
+                                                      style: TextStyle(
+                                                        color: Color.fromRGBO(
+                                                            235, 118, 189, 1),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  data.docs[index]['state'] == 0
+                                                      ? Text(
+                                                          "State: Not Delivered",
+                                                          style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    235,
+                                                                    118,
+                                                                    189,
+                                                                    1),
+                                                          ),
+                                                        )
+                                                      : Text(
+                                                          "State: Delivered",
+                                                          style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    235,
+                                                                    118,
+                                                                    189,
+                                                                    1),
+                                                          ),
+                                                        ),
+                                                ],
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                        left: 10, right: 10),
+                                                    child: Text(
+                                                      " Total:   " +
+                                                          data.docs[index]
+                                                                  ['totalI']
+                                                              .toStringAsFixed(
+                                                                  1) +
+                                                          " IQD  -  " +
+                                                          data.docs[index]
+                                                                  ['totalP']
+                                                              .toStringAsFixed(
+                                                                  1) +
+                                                          " Lb",
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: Color.fromRGBO(
+                                                            235, 118, 189, 1),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Container(
+                                                padding: EdgeInsets.only(
+                                                    top: 10, bottom: 10),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceAround,
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  right: 8.0),
+                                                          child:
+                                                              NeumorphicButton(
+                                                            child: Text(
+                                                              "Detail",
+                                                              style: TextStyle(
+                                                                fontSize: 10,
                                                                 color: Color
                                                                     .fromRGBO(
                                                                         235,
                                                                         118,
                                                                         189,
                                                                         1),
-                                                              ))
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            )
-                                          ],
+                                                              ),
+                                                            ),
+                                                            onPressed: () {
+                                                              setState(() {
+                                                                btnAction = 3;
+
+                                                                currentDoc =
+                                                                    data.docs[
+                                                                        index];
+                                                              });
+                                                            },
+                                                            style: NeumorphicStyle(
+                                                                shadowDarkColor:
+                                                                    Colors
+                                                                        .black38,
+                                                                color: Colors
+                                                                    .white),
+                                                          ),
+                                                        ),
+                                                        data.docs[index]
+                                                                    ['state'] ==
+                                                                1
+                                                            ? Container()
+                                                            : Padding(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        right:
+                                                                            8.0),
+                                                                child:
+                                                                    NeumorphicButton(
+                                                                  child: Text(
+                                                                    "Cancle",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontSize:
+                                                                          10,
+                                                                      color: Color.fromRGBO(
+                                                                          235,
+                                                                          118,
+                                                                          189,
+                                                                          1),
+                                                                    ),
+                                                                  ),
+                                                                  onPressed:
+                                                                      () {
+                                                                    setState(
+                                                                        () {
+                                                                      btnAction =
+                                                                          1;
+                                                                      currentDoc =
+                                                                          data.docs[
+                                                                              index];
+                                                                    });
+                                                                  },
+                                                                  style: NeumorphicStyle(
+                                                                      shadowDarkColor:
+                                                                          Colors
+                                                                              .black38,
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
+                                                              ),
+                                                        data.docs[index]
+                                                                    ['state'] ==
+                                                                1
+                                                            ? Container()
+                                                            : NeumorphicButton(
+                                                                child: Text(
+                                                                  "Done",
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        10,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                                ),
+                                                                onPressed: () {
+                                                                  setState(() {
+                                                                    btnAction =
+                                                                        2;
+                                                                    currentDoc =
+                                                                        data.docs[
+                                                                            index];
+                                                                  });
+                                                                },
+                                                                style:
+                                                                    NeumorphicStyle(
+                                                                  shadowDarkColor:
+                                                                      Colors
+                                                                          .black38,
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          235,
+                                                                          118,
+                                                                          189,
+                                                                          1),
+                                                                ))
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    );
+                                      );
                               } else {
                                 return data.docs[index]['state'] == 0
                                     ? Container()
                                     : Container(
-                                      margin: EdgeInsets.all(5),
-                                      child: new Neumorphic(
-                                        padding: EdgeInsets.only(left: 10),
-                                        style: NeumorphicStyle(
-                                            border: NeumorphicBorder(
-                                          color: Color.fromRGBO(
-                                              235, 118, 189, 1),
-                                        )),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceAround,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Icon(
-                                                      Icons.person,
-                                                      size: 18,
-                                                      color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
-                                                    ),
-                                                    Text(
-                                                      "  " +
-                                                          data.docs[index][
-                                                              'CustomerName'],
-                                                      style: TextStyle(
-                                                        color:
-                                                            Color.fromRGBO(
-                                                                235,
-                                                                118,
-                                                                189,
-                                                                1),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                Text(
-                                                  "Post Code: " +
-                                                      data.docs[index]
-                                                              ['code']
-                                                          .toString(),
-                                                  style: TextStyle(
-                                                    color: Color.fromRGBO(
-                                                        235, 118, 189, 1),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  " Invoice No: " +
-                                                      data.docs[index].id
-                                                          .toString()
-                                                          .substring(1, 7),
-                                                  style: TextStyle(
-                                                    color: Color.fromRGBO(
-                                                        235, 118, 189, 1),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                            Container(
-                                              padding: EdgeInsets.only(
-                                                  left: 10, right: 10),
-                                              child: Row(
+                                        margin: EdgeInsets.all(5),
+                                        child: new Neumorphic(
+                                          padding: EdgeInsets.only(left: 10),
+                                          style: NeumorphicStyle(
+                                              border: NeumorphicBorder(
+                                            color: Color.fromRGBO(
+                                                235, 118, 189, 1),
+                                          )),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.start,
+                                                    MainAxisAlignment
+                                                        .spaceAround,
                                                 children: [
                                                   Row(
                                                     children: [
                                                       Icon(
-                                                        Icons.phone,
+                                                        Icons.person,
                                                         size: 18,
-                                                        color:
-                                                            Color.fromRGBO(
-                                                                235,
-                                                                118,
-                                                                189,
-                                                                1),
+                                                        color: Color.fromRGBO(
+                                                            235, 118, 189, 1),
                                                       ),
                                                       Text(
                                                         "  " +
-                                                            data.docs[index]
-                                                                [
-                                                                'phoneNo2'],
+                                                            data.docs[index][
+                                                                'CustomerName'],
                                                         style: TextStyle(
-                                                          color: Color
-                                                              .fromRGBO(
-                                                                  235,
-                                                                  118,
-                                                                  189,
-                                                                  1),
+                                                          color: Color.fromRGBO(
+                                                              235, 118, 189, 1),
                                                         ),
                                                       )
                                                     ],
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.only(
-                                                      left: 10,
+                                                  Text(
+                                                    "Post Code: " +
+                                                        data.docs[index]['code']
+                                                            .toString(),
+                                                    style: TextStyle(
+                                                      color: Color.fromRGBO(
+                                                          235, 118, 189, 1),
                                                     ),
-                                                    child: Row(
+                                                  ),
+                                                  Text(
+                                                    " Invoice No: " +
+                                                        data.docs[index].id
+                                                            .toString()
+                                                            .substring(1, 7),
+                                                    style: TextStyle(
+                                                      color: Color.fromRGBO(
+                                                          235, 118, 189, 1),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              Container(
+                                                padding: EdgeInsets.only(
+                                                    left: 10, right: 10),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Row(
                                                       children: [
                                                         Icon(
                                                           Icons.phone,
                                                           size: 18,
-                                                          color: Color
-                                                              .fromRGBO(
-                                                                  235,
-                                                                  118,
-                                                                  189,
-                                                                  1),
+                                                          color: Color.fromRGBO(
+                                                              235, 118, 189, 1),
                                                         ),
                                                         Text(
                                                           "  " +
-                                                              data.docs[
-                                                                      index]
-                                                                  [
-                                                                  'phoneNo2'],
+                                                              data.docs[index]
+                                                                  ['phoneNo2'],
                                                           style: TextStyle(
-                                                            color: Color
-                                                                .fromRGBO(
+                                                            color:
+                                                                Color.fromRGBO(
                                                                     235,
                                                                     118,
                                                                     189,
@@ -1016,181 +945,28 @@ class _InvoicesState extends State<Invoices> {
                                                         )
                                                       ],
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Container(
-                                              child: Row(
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.only(
-                                                            left: 10,
-                                                            right: 10),
-                                                    child: Icon(
-                                                      Icons
-                                                          .pin_drop_outlined,
-                                                      size: 18,
-                                                      color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Text(
-                                                      data.docs[index]
-                                                          ['address'],
-                                                      overflow: TextOverflow
-                                                          .ellipsis,
-                                                      style: TextStyle(
-                                                        color:
-                                                            Color.fromRGBO(
-                                                                235,
-                                                                118,
-                                                                189,
-                                                                1),
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                        left: 10,
                                                       ),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                            Container(
-                                              child: Row(
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.only(
-                                                            left: 10,
-                                                            right: 10),
-                                                    child: Icon(
-                                                      Icons.date_range,
-                                                      size: 18,
-                                                      color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Text(
-                                                      data.docs[index]
-                                                          ['sellingDate'],
-                                                      overflow: TextOverflow
-                                                          .ellipsis,
-                                                      style: TextStyle(
-                                                        color:
-                                                            Color.fromRGBO(
-                                                                235,
-                                                                118,
-                                                                189,
-                                                                1),
-                                                      ),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  padding: EdgeInsets.only(
-                                                      left: 10, right: 10),
-                                                  child: Text(
-                                                    " Products:  " +
-                                                        data.docs[index][
-                                                                'noOfProducts']
-                                                            .toString(),
-                                                    style: TextStyle(
-                                                      color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
-                                                    ),
-                                                  ),
-                                                ),
-                                                data.docs[index]['state'] ==
-                                                        0
-                                                    ? Text(
-                                                        "State: Not Delivered",
-                                                        style: TextStyle(
-                                                          color: Color
-                                                              .fromRGBO(
-                                                                  235,
-                                                                  118,
-                                                                  189,
-                                                                  1),
-                                                        ),
-                                                      )
-                                                    : Text(
-                                                        "State: Delivered",
-                                                        style: TextStyle(
-                                                          color: Color
-                                                              .fromRGBO(
-                                                                  235,
-                                                                  118,
-                                                                  189,
-                                                                  1),
-                                                        ),
-                                                      ),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  padding: EdgeInsets.only(
-                                                      left: 10, right: 10),
-                                                  child: Text(
-                                                    " Total:   " +
-                                                        data.docs[index]
-                                                                ['totalI']
-                                                            .toString() +
-                                                        " IQD  -  " +
-                                                        data.docs[index]
-                                                                ['totalP']
-                                                            .toStringAsFixed(
-                                                                1) +
-                                                        " Lb",
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Container(
-                                              padding: EdgeInsets.only(
-                                                  top: 10, bottom: 10),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                right: 8.0),
-                                                        child:
-                                                            NeumorphicButton(
-                                                          onPressed: () {
-                                                            setState(() {
-                                                              btnAction = 3;
-
-                                                              currentDoc =
-                                                                  data.docs[
-                                                                      index];
-                                                            });
-                                                          },
-                                                          child: Text(
-                                                            "Detail",
-                                                            style:
-                                                                TextStyle(
-                                                              fontSize: 10,
+                                                      child: Row(
+                                                        children: [
+                                                          Icon(
+                                                            Icons.phone,
+                                                            size: 18,
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    235,
+                                                                    118,
+                                                                    189,
+                                                                    1),
+                                                          ),
+                                                          Text(
+                                                            "  " +
+                                                                data.docs[index]
+                                                                    [
+                                                                    'phoneNo2'],
+                                                            style: TextStyle(
                                                               color: Color
                                                                   .fromRGBO(
                                                                       235,
@@ -1198,104 +974,274 @@ class _InvoicesState extends State<Invoices> {
                                                                       189,
                                                                       1),
                                                             ),
-                                                          ),
-                                                          style: NeumorphicStyle(
-                                                              shadowDarkColor:
-                                                                  Colors
-                                                                      .black38,
-                                                              color: Colors
-                                                                  .white),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                child: Row(
+                                                  children: [
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                          left: 10, right: 10),
+                                                      child: Icon(
+                                                        Icons.pin_drop_outlined,
+                                                        size: 18,
+                                                        color: Color.fromRGBO(
+                                                            235, 118, 189, 1),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Text(
+                                                        data.docs[index]
+                                                            ['address'],
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                          color: Color.fromRGBO(
+                                                              235, 118, 189, 1),
                                                         ),
                                                       ),
-                                                      data.docs[index][
-                                                                  'state'] ==
-                                                              1
-                                                          ? Container()
-                                                          : Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      right:
-                                                                          8.0),
-                                                              child:
-                                                                  NeumorphicButton(
-                                                                child: Text(
-                                                                  "Cancle",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        10,
-                                                                    color: Color.fromRGBO(
-                                                                        235,
-                                                                        118,
-                                                                        189,
-                                                                        1),
-                                                                  ),
-                                                                ),
-                                                                onPressed:
-                                                                    () {
-                                                                  setState(
-                                                                      () {
-                                                                    btnAction =
-                                                                        1;
-                                                                    currentDoc =
-                                                                        data.docs[index];
-                                                                  });
-                                                                },
-                                                                style: NeumorphicStyle(
-                                                                    shadowDarkColor:
-                                                                        Colors
-                                                                            .black38,
-                                                                    color: Colors
-                                                                        .white),
-                                                              ),
-                                                            ),
-                                                      data.docs[index][
-                                                                  'state'] ==
-                                                              1
-                                                          ? Container()
-                                                          : NeumorphicButton(
-                                                              child: Text(
-                                                                "Done",
-                                                                style:
-                                                                    TextStyle(
-                                                                  fontSize:
-                                                                      10,
-                                                                  color: Colors
-                                                                      .white,
-                                                                ),
-                                                              ),
-                                                              onPressed:
-                                                                  () {
-                                                                setState(
-                                                                    () {
-                                                                  btnAction =
-                                                                      2;
-                                                                  currentDoc =
-                                                                      data.docs[
-                                                                          index];
-                                                                });
-                                                              },
-                                                              style:
-                                                                  NeumorphicStyle(
-                                                                shadowDarkColor:
-                                                                    Colors
-                                                                        .black38,
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                child: Row(
+                                                  children: [
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                          left: 10, right: 10),
+                                                      child: Icon(
+                                                        Icons.date_range,
+                                                        size: 18,
+                                                        color: Color.fromRGBO(
+                                                            235, 118, 189, 1),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Text(
+                                                        data.docs[index]
+                                                            ['sellingDate'],
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                          color: Color.fromRGBO(
+                                                              235, 118, 189, 1),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                        left: 10, right: 10),
+                                                    child: Text(
+                                                      " Products:  " +
+                                                          data.docs[index][
+                                                                  'noOfProducts']
+                                                              .toString(),
+                                                      style: TextStyle(
+                                                        color: Color.fromRGBO(
+                                                            235, 118, 189, 1),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  data.docs[index]['state'] == 0
+                                                      ? Text(
+                                                          "State: Not Delivered",
+                                                          style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    235,
+                                                                    118,
+                                                                    189,
+                                                                    1),
+                                                          ),
+                                                        )
+                                                      : Text(
+                                                          "State: Delivered",
+                                                          style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    235,
+                                                                    118,
+                                                                    189,
+                                                                    1),
+                                                          ),
+                                                        ),
+                                                ],
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                        left: 10, right: 10),
+                                                    child: Text(
+                                                      " Total:   " +
+                                                          data.docs[index]
+                                                                  ['totalI']
+                                                              .toStringAsFixed(
+                                                                  1) +
+                                                          " IQD  -  " +
+                                                          data.docs[index]
+                                                                  ['totalP']
+                                                              .toStringAsFixed(
+                                                                  1) +
+                                                          " Lb",
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: Color.fromRGBO(
+                                                            235, 118, 189, 1),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Container(
+                                                padding: EdgeInsets.only(
+                                                    top: 10, bottom: 10),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceAround,
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  right: 8.0),
+                                                          child:
+                                                              NeumorphicButton(
+                                                            onPressed: () {
+                                                              setState(() {
+                                                                btnAction = 3;
+
+                                                                currentDoc =
+                                                                    data.docs[
+                                                                        index];
+                                                              });
+                                                            },
+                                                            child: Text(
+                                                              "Detail",
+                                                              style: TextStyle(
+                                                                fontSize: 10,
                                                                 color: Color
                                                                     .fromRGBO(
                                                                         235,
                                                                         118,
                                                                         189,
                                                                         1),
-                                                              ))
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            )
-                                          ],
+                                                              ),
+                                                            ),
+                                                            style: NeumorphicStyle(
+                                                                shadowDarkColor:
+                                                                    Colors
+                                                                        .black38,
+                                                                color: Colors
+                                                                    .white),
+                                                          ),
+                                                        ),
+                                                        data.docs[index]
+                                                                    ['state'] ==
+                                                                1
+                                                            ? Container()
+                                                            : Padding(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        right:
+                                                                            8.0),
+                                                                child:
+                                                                    NeumorphicButton(
+                                                                  child: Text(
+                                                                    "Cancle",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontSize:
+                                                                          10,
+                                                                      color: Color.fromRGBO(
+                                                                          235,
+                                                                          118,
+                                                                          189,
+                                                                          1),
+                                                                    ),
+                                                                  ),
+                                                                  onPressed:
+                                                                      () {
+                                                                    setState(
+                                                                        () {
+                                                                      btnAction =
+                                                                          1;
+                                                                      currentDoc =
+                                                                          data.docs[
+                                                                              index];
+                                                                    });
+                                                                  },
+                                                                  style: NeumorphicStyle(
+                                                                      shadowDarkColor:
+                                                                          Colors
+                                                                              .black38,
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
+                                                              ),
+                                                        data.docs[index]
+                                                                    ['state'] ==
+                                                                1
+                                                            ? Container()
+                                                            : NeumorphicButton(
+                                                                child: Text(
+                                                                  "Done",
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        10,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                                ),
+                                                                onPressed: () {
+                                                                  setState(() {
+                                                                    btnAction =
+                                                                        2;
+                                                                    currentDoc =
+                                                                        data.docs[
+                                                                            index];
+                                                                  });
+                                                                },
+                                                                style:
+                                                                    NeumorphicStyle(
+                                                                  shadowDarkColor:
+                                                                      Colors
+                                                                          .black38,
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          235,
+                                                                          118,
+                                                                          189,
+                                                                          1),
+                                                                ))
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    );
+                                      );
                               }
                             },
                           ),
@@ -1769,8 +1715,8 @@ class _InvoicesState extends State<Invoices> {
                                                                     ),
                                                                   ),
                                                                   Text(
-                                                                    currentDoc["productSell"][index]['priceI']
-                                                                            .toString() +
+                                                                    currentDoc["productSell"][index]['priceI'].toStringAsFixed(
+                                                                            1) +
                                                                         " IQD      -      " +
                                                                         currentDoc["productSell"][index]['quantity']
                                                                             .toString(),
@@ -1809,7 +1755,8 @@ class _InvoicesState extends State<Invoices> {
                                                         "Buying Total:   " +
                                                             currentDoc[
                                                                     'totalBuy']
-                                                                .toString()
+                                                                .toStringAsFixed(
+                                                                    1)
                                                                 .replaceAllMapped(
                                                                     RegExp(
                                                                         r'(\d{1,3})(?=(\d{3})+(?!\d))'),
@@ -1829,7 +1776,8 @@ class _InvoicesState extends State<Invoices> {
                                                         "   Selling Total:   " +
                                                             currentDoc[
                                                                     'totalCI']
-                                                                .toString()
+                                                                .toStringAsFixed(
+                                                                    1)
                                                                 .replaceAllMapped(
                                                                     RegExp(
                                                                         r'(\d{1,3})(?=(\d{3})+(?!\d))'),
@@ -1850,7 +1798,8 @@ class _InvoicesState extends State<Invoices> {
                                                             (currentDoc['totalCI'] -
                                                                     currentDoc[
                                                                         'totalBuy'])
-                                                                .toString()
+                                                                .toStringAsFixed(
+                                                                    1)
                                                                 .replaceAllMapped(
                                                                     RegExp(
                                                                         r'(\d{1,3})(?=(\d{3})+(?!\d))'),
@@ -1868,10 +1817,10 @@ class _InvoicesState extends State<Invoices> {
                                                           right: 10),
                                                       child: currentDoc[
                                                                   'totalDis'] ==
-                                                              null
+                                                              0
                                                           ? Text(
                                                               "   Discount:   " +
-                                                                  "0%",
+                                                                  "0 %",
                                                               style: TextStyle(
                                                                 color: Color
                                                                     .fromRGBO(
@@ -1883,9 +1832,9 @@ class _InvoicesState extends State<Invoices> {
                                                             )
                                                           : Text(
                                                               "   Discount:   " +
-                                                                  (((currentDoc['totalCI'] + currentDoc['totalBuy']) / currentDoc['totalCI'])
-                                                                              .round() *
-                                                                          10)
+                                                                  (((currentDoc['totalCI'] - currentDoc['totalDis']) /
+                                                                              currentDoc['totalCI']) *
+                                                                          100)
                                                                       .toString() +
                                                                   " %",
                                                               style: TextStyle(
@@ -1910,7 +1859,8 @@ class _InvoicesState extends State<Invoices> {
                                                       child: Text(
                                                         " Total:   " +
                                                             currentDoc['totalI']
-                                                                .toString()
+                                                                .toStringAsFixed(
+                                                                    1)
                                                                 .replaceAllMapped(
                                                                     RegExp(
                                                                         r'(\d{1,3})(?=(\d{3})+(?!\d))'),
@@ -1939,7 +1889,7 @@ class _InvoicesState extends State<Invoices> {
                                                         (currentDoc['totalI'] -
                                                                 currentDoc[
                                                                     'totalBuy'])
-                                                            .toString()
+                                                            .toStringAsFixed(1)
                                                             .replaceAllMapped(
                                                                 RegExp(
                                                                     r'(\d{1,3})(?=(\d{3})+(?!\d))'),

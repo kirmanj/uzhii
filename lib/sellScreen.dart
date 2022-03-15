@@ -341,7 +341,8 @@ class _SellScreenState extends State<SellScreen> {
                                                                             index]
                                                                         [
                                                                         "priceI"]
-                                                                    .toString() +
+                                                                    .toStringAsFixed(
+                                                                        1) +
                                                                 "  IQD  " +
                                                                 "  Quantity  " +
                                                                 sell["products"]
@@ -482,7 +483,7 @@ class _SellScreenState extends State<SellScreen> {
                                                                             .bold),
                                                               )
                                                             : Text(
-                                                                totalPrice.toString().replaceAllMapped(
+                                                                totalPrice.toStringAsFixed(1).replaceAllMapped(
                                                                         RegExp(
                                                                             r'(\d{1,3})(?=(\d{3})+(?!\d))'),
                                                                         (Match m) =>
@@ -511,7 +512,8 @@ class _SellScreenState extends State<SellScreen> {
                                                           : Container(
                                                               child: Text(
                                                               discountPrice
-                                                                      .toString()
+                                                                      .toStringAsFixed(
+                                                                          1)
                                                                       .replaceAllMapped(
                                                                           RegExp(
                                                                               r'(\d{1,3})(?=(\d{3})+(?!\d))'),
@@ -981,7 +983,7 @@ class _SellScreenState extends State<SellScreen> {
                                                                           Text(
                                                                         post["products"][index]["price"].toStringAsFixed(1) +
                                                                             " Ld     " +
-                                                                            post["products"][index]["priceI"].toString() +
+                                                                            post["products"][index]["priceI"].toStringAsFixed(1) +
                                                                             "  IQD  " +
                                                                             "  in store  " +
                                                                             post["remainProducts"][index]['quantity'].toString(),
@@ -1221,7 +1223,8 @@ class _SellScreenState extends State<SellScreen> {
                                                         )
                                                       : Text(
                                                           totalPrice
-                                                                  .toString()
+                                                                  .toStringAsFixed(
+                                                                      1)
                                                                   .replaceAllMapped(
                                                                       RegExp(
                                                                           r'(\d{1,3})(?=(\d{3})+(?!\d))'),

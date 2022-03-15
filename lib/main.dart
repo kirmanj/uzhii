@@ -4,14 +4,11 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:uzhii/Posts.dart';
-import 'package:uzhii/Postscreen.dart';
 import 'package:uzhii/Products.dart';
 import 'package:uzhii/invoices.dart';
 import 'package:uzhii/profile.dart';
-import 'package:uzhii/singin.dart';
 import 'package:uzhii/splash.dart';
 import 'package:uzhii/wareHouse.dart';
-import 'package:line_icons/line_icon.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -113,7 +110,6 @@ class Screens extends StatelessWidget {
     return PersistentTabView(
       context,
       controller: _controller,
-
       screens: _buildScreens(),
       items: _navBarsItems(),
       confineInSafeArea: true,
@@ -147,86 +143,3 @@ class Screens extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// class _UZHIIState extends State<UZHII> {
-//   @override
-//   Widget build(BuildContext context) {
-//     timeDilation = 0.1;
-//     double width = MediaQuery.of(context).size.width;
-//     double height = MediaQuery.of(context).size.height;
-
-//     return Scaffold(
-//       backgroundColor: Colors.white,
-//       body: Container(
-//           child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.center,
-//         children: [
-//           Padding(
-//               padding: EdgeInsets.only(top: height * 0.05),
-//               child: Row(
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 children: [
-//                   Center(
-//                     child: Hero(
-//                       tag: "logo",
-//                       child: Container(
-//                         height: height * 0.07,
-//                         width: width * 0.7,
-//                         child: Image.asset("images/uzhi.jpg"),
-//                       ),
-//                     ),
-//                   ),
-//                   // Padding(
-//                   //   padding: EdgeInsets.only(right: 10),
-//                   //   child: GestureDetector(
-//                   //     child: Container(
-//                   //       width: width * 0.2,
-//                   //       height: height * 0.03,
-//                   //       child: Neumorphic(
-//                   //           style: NeumorphicStyle(
-//                   //               shape: NeumorphicShape.concave,
-//                   //               boxShape: NeumorphicBoxShape.roundRect(
-//                   //                   BorderRadius.circular(5)),
-//                   //               depth: 5,
-//                   //               lightSource: LightSource.topLeft,
-//                   //               color: Colors.black54),
-//                   //           child: Center(
-//                   //             child: Container(
-//                   //               // margin: EdgeInsets.all(10),
-//                   //               child: Text(
-//                   //                 "Logout",
-//                   //                 style: TextStyle(
-//                   //                     fontSize: 16,
-//                   //                     color: Colors.white,
-//                   //                     fontWeight: FontWeight.bold),
-//                   //               ),
-//                   //             ),
-//                   //           )),
-//                   //     ),
-//                   //     onTap: () => Navigator.of(context).pop(),
-//                   //   ),
-//                   // ),
-//                 ],
-//               )),
-//           Screens()
-//         ],
-//       )),
-//     );
-//   }
-// }

@@ -256,6 +256,7 @@ class _PostDetailState extends State<PostDetail> {
                                       children: [
                                         Text(
                                           post["products"][index]["name"],
+                                          overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 16,
@@ -272,11 +273,13 @@ class _PostDetailState extends State<PostDetail> {
                                                 : Text(
                                                     post["products"][index]
                                                                 ["price"]
-                                                            .toString() +
+                                                            .toStringAsFixed(
+                                                                1) +
                                                         " Ld     " +
                                                         post["products"][index]
                                                                 ["priceI"]
-                                                            .toString() +
+                                                            .toStringAsFixed(
+                                                                1) +
                                                         "  IQD  " +
                                                         "  Qtd  " +
                                                         post["products"][index]

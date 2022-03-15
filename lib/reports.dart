@@ -166,13 +166,9 @@ class _RepostsState extends State<Reposts> {
             .isBefore(DateFormat("dd-MM-yyyy").parse(element["sellingDate"]))) {
           setState(() {
             lastYear += (element['totalI'] - element['totalBuy']).toInt();
+            print(lastYear);
           });
         }
-
-        print(DateFormat("dd-MM-yyyy").parse(element["sellingDate"]).year ==
-            DateTime.now().year);
-        print((element['totalI'] - element['totalBuy']).toInt());
-        print(element["sellingDate"]);
 
         if (DateFormat("dd-MM-yyyy").parse(element["sellingDate"]).year ==
             DateTime.now().year) {
@@ -220,12 +216,14 @@ class _RepostsState extends State<Reposts> {
 
           double total = 0;
           String name = "";
+          print("hi");
           FirebaseFirestore.instance
               .collection('invoice')
               .where("phoneNo1", isEqualTo: element['phoneNo1'])
               .get()
               .then((value) {
             name = element['CustomerName'];
+            print(name);
             value.docs.forEach((element) {
               total += (element['totalI'] - element['totalBuy']);
             });
@@ -237,6 +235,7 @@ class _RepostsState extends State<Reposts> {
             });
             setState(() {
               customers = customers;
+              print(customers);
             });
           });
         }
@@ -336,7 +335,7 @@ class _RepostsState extends State<Reposts> {
                   : state == 1
                       ? Container(
                           width: width,
-                          height: height*0.9,
+                          height: height * 0.9,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -660,7 +659,8 @@ class _RepostsState extends State<Reposts> {
                                                             Text(
                                                               customers[index][
                                                                           'total']
-                                                                      .toString()
+                                                                      .toStringAsFixed(
+                                                                          1)
                                                                       .replaceAllMapped(
                                                                           RegExp(
                                                                               r'(\d{1,3})(?=(\d{3})+(?!\d))'),

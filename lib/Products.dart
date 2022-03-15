@@ -48,7 +48,6 @@ class _ProductsState extends State<Products> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-
           child: Stack(
             children: [
               Row(
@@ -116,6 +115,7 @@ class _ProductsState extends State<Products> {
                                         children: [
                                           Text(
                                             data.docs[index]["name"],
+                                            overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
                                                 color: Color.fromRGBO(
                                                     235, 118, 189, 1),
@@ -125,10 +125,10 @@ class _ProductsState extends State<Products> {
                                           ),
                                           Text(
                                             data.docs[index]["priceP"]
-                                                    .toString() +
+                                                    .toStringAsFixed(1) +
                                                 " Ld     " +
                                                 data.docs[index]["priceI"]
-                                                    .toString() +
+                                                    .toStringAsFixed(1) +
                                                 "  IQD  " +
                                                 "  Quantity  " +
                                                 data.docs[index]["quantity"]
@@ -277,7 +277,6 @@ class _ProductsState extends State<Products> {
                                             }
                                           },
                                           controller: _priceP,
-                                          keyboardType: TextInputType.number,
                                           autofocus: false,
                                           decoration: InputDecoration(
                                               labelText: "Price",
@@ -313,7 +312,8 @@ class _ProductsState extends State<Products> {
                                                 _priceI == null
                                                     ? "0"
                                                     : "" +
-                                                        _priceI.toString() +
+                                                        _priceI.toStringAsFixed(
+                                                            1) +
                                                         " IQD",
                                                 style: TextStyle(
                                                     color: Color.fromRGBO(
@@ -338,7 +338,8 @@ class _ProductsState extends State<Products> {
                                               "name": _name.text,
                                               "priceP":
                                                   double.parse(_priceP.text),
-                                              "priceI": _priceI,
+                                              "priceI": num.parse(
+                                                  _priceI.toStringAsFixed(2)),
                                               "quantity": 0,
                                               "sellI": 0
                                             });
