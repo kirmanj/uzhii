@@ -50,9 +50,10 @@ class _ProfileState extends State<Profile> {
         .collection('users')
         .doc(user.uid)
         .get();
+
     setState(() {
       userRole = snapshot['role'];
-      print("userRole $userRole");
+      print(userRole);
     });
   }
 
@@ -91,22 +92,21 @@ class _ProfileState extends State<Profile> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-
                         padding: EdgeInsets.only(bottom: height * 0.2),
                         child: Column(
                           children: [
                             Container(
                               width: width * 0.5,
                               child: Container(
-                                child: Image.asset("images/plogo.png"),
+                                child: Image.asset("images/plogo1.png"),
                               ),
                             ),
                             Container(
                               child: Text(
-                                "BUYER",
+                                userRole == 1 ? "MANAGER" : "BUYER",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: Color.fromRGBO(235, 118, 189, 1),
+                                  color: Color.fromRGBO(23, 25, 95, 1),
                                 ),
                               ),
                             ),
@@ -118,40 +118,44 @@ class _ProfileState extends State<Profile> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            NeumorphicButton(
-                              child: Text(
-                                "Profit Reports        ",
-                                style: TextStyle(
-                                  color: Color.fromRGBO(235, 118, 189, 1),
-                                ),
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (ctx) => Reposts(
-                                              state: 1,
-                                            )));
-                              },
-                              style: NeumorphicStyle(color: Colors.white),
-                            ),
-                            NeumorphicButton(
-                              child: Text(
-                                "Costumer Reports",
-                                style: TextStyle(
-                                  color: Color.fromRGBO(235, 118, 189, 1),
-                                ),
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (ctx) => Reposts(
-                                              state: 2,
-                                            )));
-                              },
-                              style: NeumorphicStyle(color: Colors.white),
-                            ),
+                            userRole != 1
+                                ? Container()
+                                : NeumorphicButton(
+                                    child: Text(
+                                      "Profit Reports      ",
+                                      style: TextStyle(
+                                        color: Color.fromRGBO(23, 25, 95, 1),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (ctx) => Reposts(
+                                                    state: 1,
+                                                  )));
+                                    },
+                                    style: NeumorphicStyle(color: Colors.white),
+                                  ),
+                            userRole != 1
+                                ? Container()
+                                : NeumorphicButton(
+                                    child: Text(
+                                      "Costumer Reports",
+                                      style: TextStyle(
+                                        color: Color.fromRGBO(23, 25, 95, 1),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (ctx) => Reposts(
+                                                    state: 2,
+                                                  )));
+                                    },
+                                    style: NeumorphicStyle(color: Colors.white),
+                                  ),
                             (!edit)
                                 ? Row(
                                     mainAxisAlignment:
@@ -168,7 +172,7 @@ class _ProfileState extends State<Profile> {
                                                   " IQD",
                                               style: TextStyle(
                                                 color: Color.fromRGBO(
-                                                    235, 118, 189, 1),
+                                                    23, 25, 95, 1),
                                               ),
                                             ))),
                                       ),
@@ -185,8 +189,7 @@ class _ProfileState extends State<Profile> {
                                           });
                                         },
                                         style: NeumorphicStyle(
-                                          color:
-                                              Color.fromRGBO(235, 118, 189, 1),
+                                          color: Color.fromRGBO(23, 25, 95, 1),
                                         ),
                                       )
                                     ],
@@ -208,7 +211,7 @@ class _ProfileState extends State<Profile> {
                                                 hintText: 'Enter Number',
                                                 hintStyle: TextStyle(
                                                     color: Color.fromRGBO(
-                                                        235, 118, 189, 1),
+                                                        23, 25, 95, 1),
                                                     fontSize: 14),
                                                 contentPadding:
                                                     EdgeInsets.fromLTRB(
@@ -230,7 +233,7 @@ class _ProfileState extends State<Profile> {
                                                 Icons.close,
                                                 size: 18,
                                                 color: Color.fromRGBO(
-                                                    235, 118, 189, 1),
+                                                    23, 25, 95, 1),
                                               ),
                                               onPressed: () {
                                                 setState(() {
@@ -256,7 +259,7 @@ class _ProfileState extends State<Profile> {
                                               },
                                               style: NeumorphicStyle(
                                                 color: Color.fromRGBO(
-                                                    235, 118, 189, 1),
+                                                    23, 25, 95, 1),
                                               ))
                                         ],
                                       ),
@@ -274,7 +277,7 @@ class _ProfileState extends State<Profile> {
                         width: width * 0.3,
                         child: NeumorphicButton(
                             style: NeumorphicStyle(
-                              color: Color.fromRGBO(235, 118, 189, 1),
+                              color: Color.fromRGBO(23, 25, 95, 1),
                             ),
                             child: Container(
                                 child: Row(

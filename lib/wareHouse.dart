@@ -37,16 +37,8 @@ class _WareHouseState extends State<WareHouse> {
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
-                                color: Color.fromRGBO(235, 118, 189, 1)),
+                                color: Color.fromRGBO(23, 25, 95, 1)),
                           )),
-                          Padding(
-                            padding: EdgeInsets.only(left: 8.0),
-                            child: Container(
-                              width: 25,
-                              height: 25,
-                              child: Image.asset("images/happy.png"),
-                            ),
-                          )
                         ],
                       )),
                       Container(
@@ -65,7 +57,7 @@ class _WareHouseState extends State<WareHouse> {
                                   height: 25,
                                   child: CircularProgressIndicator(
                                     valueColor: AlwaysStoppedAnimation<Color>(
-                                        Color.fromRGBO(235, 118, 189, 1)),
+                                        Color.fromRGBO(23, 25, 95, 1)),
                                   ),
                                 ),
                               );
@@ -85,7 +77,7 @@ class _WareHouseState extends State<WareHouse> {
                                           child: Neumorphic(
                                             style: NeumorphicStyle(
                                                 color: Color.fromRGBO(
-                                                    235, 118, 189, 1)),
+                                                    23, 25, 95, 1)),
                                             child: Center(
                                               child: Container(
                                                 child: Column(
@@ -140,7 +132,7 @@ class _WareHouseState extends State<WareHouse> {
               ),
               Neumorphic(
                 child: Container(
-                  height: height * 0.40,
+                  height: height * 0.4,
                   width: width * 0.95,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -154,16 +146,8 @@ class _WareHouseState extends State<WareHouse> {
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
-                                color: Color.fromRGBO(235, 118, 189, 1)),
+                                color: Color.fromRGBO(23, 25, 95, 1)),
                           )),
-                          Padding(
-                            padding: EdgeInsets.only(left: 8.0),
-                            child: Container(
-                              width: 25,
-                              height: 25,
-                              child: Image.asset("images/sad.png"),
-                            ),
-                          )
                         ],
                       ),
                       Container(
@@ -202,7 +186,7 @@ class _WareHouseState extends State<WareHouse> {
                                           child: Neumorphic(
                                             style: NeumorphicStyle(
                                                 color: Color.fromRGBO(
-                                                    235, 118, 189, 1)),
+                                                    23, 25, 95, 1)),
                                             child: Center(
                                               child: Container(
                                                 child: Column(

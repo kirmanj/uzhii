@@ -5,6 +5,7 @@ import 'package:uzhii/Postscreen.dart';
 import 'package:uzhii/main.dart';
 import 'package:uzhii/postDetail.dart';
 import 'package:uzhii/profile.dart';
+import 'package:uzhii/sellScreen.dart';
 
 class Invoices extends StatefulWidget {
   @override
@@ -16,9 +17,40 @@ class _InvoicesState extends State<Invoices> {
 
   int btnAction = 0;
 
-  int statControll = 0;
+  int statControll = 2;
 
   QueryDocumentSnapshot currentDoc;
+
+  showAlertDialog(BuildContext context, String msg) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: Icon(
+        Icons.close,
+        color: Color.fromRGBO(23, 25, 95, 1),
+        size: 20,
+      ),
+      onPressed: () {
+        Navigator.of(context, rootNavigator: true).pop(context);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Note"),
+      content: Text(msg.toString()),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +72,7 @@ class _InvoicesState extends State<Invoices> {
                       "Invoices",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Color.fromRGBO(235, 118, 189, 1),
+                        color: Color.fromRGBO(23, 25, 95, 1),
                         fontSize: 18,
                       ),
                       textAlign: TextAlign.center,
@@ -61,7 +93,7 @@ class _InvoicesState extends State<Invoices> {
                           style: NeumorphicStyle(
                             color: statControll == 1
                                 ? Colors.white
-                                : Color.fromRGBO(235, 118, 189, 1),
+                                : Color.fromRGBO(23, 25, 95, 1),
                           ),
                           onPressed: () {
                             setState(() {
@@ -72,7 +104,7 @@ class _InvoicesState extends State<Invoices> {
                             "ALL",
                             style: TextStyle(
                                 color: statControll == 1
-                                    ? Color.fromRGBO(235, 118, 189, 1)
+                                    ? Color.fromRGBO(23, 25, 95, 1)
                                     : Colors.white,
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold),
@@ -88,13 +120,13 @@ class _InvoicesState extends State<Invoices> {
                           style: NeumorphicStyle(
                             color: statControll == 2
                                 ? Colors.white
-                                : Color.fromRGBO(235, 118, 189, 1),
+                                : Color.fromRGBO(23, 25, 95, 1),
                           ),
                           child: Text(
                             "New",
                             style: TextStyle(
                                 color: statControll == 2
-                                    ? Color.fromRGBO(235, 118, 189, 1)
+                                    ? Color.fromRGBO(23, 25, 95, 1)
                                     : Colors.white,
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold),
@@ -105,7 +137,7 @@ class _InvoicesState extends State<Invoices> {
                           style: NeumorphicStyle(
                             color: statControll == 3
                                 ? Colors.white
-                                : Color.fromRGBO(235, 118, 189, 1),
+                                : Color.fromRGBO(23, 25, 95, 1),
                           ),
                           onPressed: () {
                             setState(() {
@@ -116,7 +148,7 @@ class _InvoicesState extends State<Invoices> {
                             "History",
                             style: TextStyle(
                                 color: statControll == 3
-                                    ? Color.fromRGBO(235, 118, 189, 1)
+                                    ? Color.fromRGBO(23, 25, 95, 1)
                                     : Colors.white,
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold),
@@ -162,7 +194,7 @@ class _InvoicesState extends State<Invoices> {
                                     padding: EdgeInsets.only(left: 10),
                                     style: NeumorphicStyle(
                                         border: NeumorphicBorder(
-                                      color: Color.fromRGBO(235, 118, 189, 1),
+                                      color: Color.fromRGBO(23, 25, 95, 1),
                                     )),
                                     child: Column(
                                       mainAxisAlignment:
@@ -172,34 +204,29 @@ class _InvoicesState extends State<Invoices> {
                                       children: [
                                         Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.person,
-                                                  size: 18,
-                                                  color: Color.fromRGBO(
-                                                      235, 118, 189, 1),
-                                                ),
-                                                Text(
-                                                  "  " +
-                                                      data.docs[index]
-                                                          ['CustomerName'],
-                                                  style: TextStyle(
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                  left: 8.0, right: 8),
+                                              child: Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.person,
+                                                    size: 18,
                                                     color: Color.fromRGBO(
-                                                        235, 118, 189, 1),
+                                                        23, 25, 95, 1),
                                                   ),
-                                                )
-                                              ],
-                                            ),
-                                            Text(
-                                              "Post Code: " +
-                                                  data.docs[index]['code']
-                                                      .toString(),
-                                              style: TextStyle(
-                                                color: Color.fromRGBO(
-                                                    235, 118, 189, 1),
+                                                  Text(
+                                                    "  " +
+                                                        data.docs[index]
+                                                            ['CustomerName'],
+                                                    style: TextStyle(
+                                                      color: Color.fromRGBO(
+                                                          23, 25, 95, 1),
+                                                    ),
+                                                  )
+                                                ],
                                               ),
                                             ),
                                             Text(
@@ -209,7 +236,7 @@ class _InvoicesState extends State<Invoices> {
                                                       .substring(1, 7),
                                               style: TextStyle(
                                                 color: Color.fromRGBO(
-                                                    235, 118, 189, 1),
+                                                    23, 25, 95, 1),
                                               ),
                                             )
                                           ],
@@ -227,7 +254,7 @@ class _InvoicesState extends State<Invoices> {
                                                     Icons.phone,
                                                     size: 18,
                                                     color: Color.fromRGBO(
-                                                        235, 118, 189, 1),
+                                                        23, 25, 95, 1),
                                                   ),
                                                   Text(
                                                     "  " +
@@ -235,7 +262,7 @@ class _InvoicesState extends State<Invoices> {
                                                             ['phoneNo2'],
                                                     style: TextStyle(
                                                       color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
+                                                          23, 25, 95, 1),
                                                     ),
                                                   )
                                                 ],
@@ -250,7 +277,7 @@ class _InvoicesState extends State<Invoices> {
                                                       Icons.phone,
                                                       size: 18,
                                                       color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
+                                                          23, 25, 95, 1),
                                                     ),
                                                     Text(
                                                       "  " +
@@ -258,7 +285,7 @@ class _InvoicesState extends State<Invoices> {
                                                               ['phoneNo2'],
                                                       style: TextStyle(
                                                         color: Color.fromRGBO(
-                                                            235, 118, 189, 1),
+                                                            23, 25, 95, 1),
                                                       ),
                                                     )
                                                   ],
@@ -277,7 +304,7 @@ class _InvoicesState extends State<Invoices> {
                                                   Icons.pin_drop_outlined,
                                                   size: 18,
                                                   color: Color.fromRGBO(
-                                                      235, 118, 189, 1),
+                                                      23, 25, 95, 1),
                                                 ),
                                               ),
                                               Expanded(
@@ -287,7 +314,7 @@ class _InvoicesState extends State<Invoices> {
                                                       TextOverflow.ellipsis,
                                                   style: TextStyle(
                                                     color: Color.fromRGBO(
-                                                        235, 118, 189, 1),
+                                                        23, 25, 95, 1),
                                                   ),
                                                 ),
                                               )
@@ -308,7 +335,7 @@ class _InvoicesState extends State<Invoices> {
                                                         .toString(),
                                                 style: TextStyle(
                                                   color: Color.fromRGBO(
-                                                      235, 118, 189, 1),
+                                                      23, 25, 95, 1),
                                                 ),
                                               ),
                                             ),
@@ -317,14 +344,14 @@ class _InvoicesState extends State<Invoices> {
                                                     "State: Not Delivered",
                                                     style: TextStyle(
                                                       color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
+                                                          23, 25, 95, 1),
                                                     ),
                                                   )
                                                 : Text(
                                                     "State: Delivered",
                                                     style: TextStyle(
                                                       color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
+                                                          23, 25, 95, 1),
                                                     ),
                                                   ),
                                           ],
@@ -347,7 +374,7 @@ class _InvoicesState extends State<Invoices> {
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.w700,
                                                   color: Color.fromRGBO(
-                                                      235, 118, 189, 1),
+                                                      23, 25, 95, 1),
                                                 ),
                                               ),
                                             ),
@@ -371,7 +398,7 @@ class _InvoicesState extends State<Invoices> {
                                                         style: TextStyle(
                                                           fontSize: 10,
                                                           color: Color.fromRGBO(
-                                                              235, 118, 189, 1),
+                                                              23, 25, 95, 1),
                                                         ),
                                                       ),
                                                       onPressed: () {
@@ -402,9 +429,9 @@ class _InvoicesState extends State<Invoices> {
                                                                 fontSize: 10,
                                                                 color: Color
                                                                     .fromRGBO(
-                                                                        235,
-                                                                        118,
-                                                                        189,
+                                                                        23,
+                                                                        25,
+                                                                        95,
                                                                         1),
                                                               ),
                                                             ),
@@ -448,9 +475,9 @@ class _InvoicesState extends State<Invoices> {
                                                                 Colors.black38,
                                                             color:
                                                                 Color.fromRGBO(
-                                                                    235,
-                                                                    118,
-                                                                    189,
+                                                                    23,
+                                                                    25,
+                                                                    95,
                                                                     1),
                                                           ))
                                                 ],
@@ -471,8 +498,8 @@ class _InvoicesState extends State<Invoices> {
                                           padding: EdgeInsets.only(left: 10),
                                           style: NeumorphicStyle(
                                               border: NeumorphicBorder(
-                                            color: Color.fromRGBO(
-                                                235, 118, 189, 1),
+                                            color:
+                                                Color.fromRGBO(23, 25, 95, 1),
                                           )),
                                           child: Column(
                                             mainAxisAlignment:
@@ -480,50 +507,49 @@ class _InvoicesState extends State<Invoices> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Icon(
-                                                        Icons.person,
-                                                        size: 18,
-                                                        color: Color.fromRGBO(
-                                                            235, 118, 189, 1),
-                                                      ),
-                                                      Text(
-                                                        "  " +
-                                                            data.docs[index][
-                                                                'CustomerName'],
-                                                        style: TextStyle(
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 8.0, right: 8),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Icon(
+                                                          Icons.person,
+                                                          size: 18,
                                                           color: Color.fromRGBO(
-                                                              235, 118, 189, 1),
+                                                              23, 25, 95, 1),
                                                         ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                  Text(
-                                                    "Post Code: " +
-                                                        data.docs[index]['code']
-                                                            .toString(),
-                                                    style: TextStyle(
-                                                      color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
+                                                        Text(
+                                                          "  " +
+                                                              data.docs[index][
+                                                                  'CustomerName'],
+                                                          style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    23,
+                                                                    25,
+                                                                    95,
+                                                                    1),
+                                                          ),
+                                                        )
+                                                      ],
                                                     ),
-                                                  ),
-                                                  Text(
-                                                    " Invoice No: " +
-                                                        data.docs[index].id
-                                                            .toString()
-                                                            .substring(1, 7),
-                                                    style: TextStyle(
-                                                      color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
-                                                    ),
-                                                  )
-                                                ],
+                                                    Text(
+                                                      " Invoice No: " +
+                                                          data.docs[index].id
+                                                              .toString()
+                                                              .substring(1, 7),
+                                                      style: TextStyle(
+                                                        color: Color.fromRGBO(
+                                                            23, 25, 95, 1),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
                                               ),
                                               Container(
                                                 padding: EdgeInsets.only(
@@ -538,7 +564,7 @@ class _InvoicesState extends State<Invoices> {
                                                           Icons.phone,
                                                           size: 18,
                                                           color: Color.fromRGBO(
-                                                              235, 118, 189, 1),
+                                                              23, 25, 95, 1),
                                                         ),
                                                         Text(
                                                           "  " +
@@ -547,9 +573,9 @@ class _InvoicesState extends State<Invoices> {
                                                           style: TextStyle(
                                                             color:
                                                                 Color.fromRGBO(
-                                                                    235,
-                                                                    118,
-                                                                    189,
+                                                                    23,
+                                                                    25,
+                                                                    95,
                                                                     1),
                                                           ),
                                                         )
@@ -566,9 +592,9 @@ class _InvoicesState extends State<Invoices> {
                                                             size: 18,
                                                             color:
                                                                 Color.fromRGBO(
-                                                                    235,
-                                                                    118,
-                                                                    189,
+                                                                    23,
+                                                                    25,
+                                                                    95,
                                                                     1),
                                                           ),
                                                           Text(
@@ -579,9 +605,9 @@ class _InvoicesState extends State<Invoices> {
                                                             style: TextStyle(
                                                               color: Color
                                                                   .fromRGBO(
-                                                                      235,
-                                                                      118,
-                                                                      189,
+                                                                      23,
+                                                                      25,
+                                                                      95,
                                                                       1),
                                                             ),
                                                           )
@@ -601,7 +627,7 @@ class _InvoicesState extends State<Invoices> {
                                                         Icons.pin_drop_outlined,
                                                         size: 18,
                                                         color: Color.fromRGBO(
-                                                            235, 118, 189, 1),
+                                                            23, 25, 95, 1),
                                                       ),
                                                     ),
                                                     Expanded(
@@ -612,7 +638,7 @@ class _InvoicesState extends State<Invoices> {
                                                             .ellipsis,
                                                         style: TextStyle(
                                                           color: Color.fromRGBO(
-                                                              235, 118, 189, 1),
+                                                              23, 25, 95, 1),
                                                         ),
                                                       ),
                                                     )
@@ -629,7 +655,7 @@ class _InvoicesState extends State<Invoices> {
                                                         Icons.date_range,
                                                         size: 18,
                                                         color: Color.fromRGBO(
-                                                            235, 118, 189, 1),
+                                                            23, 25, 95, 1),
                                                       ),
                                                     ),
                                                     Expanded(
@@ -640,7 +666,7 @@ class _InvoicesState extends State<Invoices> {
                                                             .ellipsis,
                                                         style: TextStyle(
                                                           color: Color.fromRGBO(
-                                                              235, 118, 189, 1),
+                                                              23, 25, 95, 1),
                                                         ),
                                                       ),
                                                     )
@@ -661,7 +687,7 @@ class _InvoicesState extends State<Invoices> {
                                                               .toString(),
                                                       style: TextStyle(
                                                         color: Color.fromRGBO(
-                                                            235, 118, 189, 1),
+                                                            23, 25, 95, 1),
                                                       ),
                                                     ),
                                                   ),
@@ -671,9 +697,9 @@ class _InvoicesState extends State<Invoices> {
                                                           style: TextStyle(
                                                             color:
                                                                 Color.fromRGBO(
-                                                                    235,
-                                                                    118,
-                                                                    189,
+                                                                    23,
+                                                                    25,
+                                                                    95,
                                                                     1),
                                                           ),
                                                         )
@@ -682,9 +708,9 @@ class _InvoicesState extends State<Invoices> {
                                                           style: TextStyle(
                                                             color:
                                                                 Color.fromRGBO(
-                                                                    235,
-                                                                    118,
-                                                                    189,
+                                                                    23,
+                                                                    25,
+                                                                    95,
                                                                     1),
                                                           ),
                                                         ),
@@ -713,7 +739,7 @@ class _InvoicesState extends State<Invoices> {
                                                         fontWeight:
                                                             FontWeight.w700,
                                                         color: Color.fromRGBO(
-                                                            235, 118, 189, 1),
+                                                            23, 25, 95, 1),
                                                       ),
                                                     ),
                                                   ),
@@ -741,9 +767,9 @@ class _InvoicesState extends State<Invoices> {
                                                                 fontSize: 10,
                                                                 color: Color
                                                                     .fromRGBO(
-                                                                        235,
-                                                                        118,
-                                                                        189,
+                                                                        23,
+                                                                        25,
+                                                                        95,
                                                                         1),
                                                               ),
                                                             ),
@@ -781,11 +807,12 @@ class _InvoicesState extends State<Invoices> {
                                                                         TextStyle(
                                                                       fontSize:
                                                                           10,
-                                                                      color: Color.fromRGBO(
-                                                                          235,
-                                                                          118,
-                                                                          189,
-                                                                          1),
+                                                                      color: Color
+                                                                          .fromRGBO(
+                                                                              23,
+                                                                              25,
+                                                                              95,
+                                                                              1),
                                                                     ),
                                                                   ),
                                                                   onPressed:
@@ -838,9 +865,9 @@ class _InvoicesState extends State<Invoices> {
                                                                           .black38,
                                                                   color: Color
                                                                       .fromRGBO(
-                                                                          235,
-                                                                          118,
-                                                                          189,
+                                                                          23,
+                                                                          25,
+                                                                          95,
                                                                           1),
                                                                 ))
                                                       ],
@@ -861,8 +888,8 @@ class _InvoicesState extends State<Invoices> {
                                           padding: EdgeInsets.only(left: 10),
                                           style: NeumorphicStyle(
                                               border: NeumorphicBorder(
-                                            color: Color.fromRGBO(
-                                                235, 118, 189, 1),
+                                            color:
+                                                Color.fromRGBO(23, 25, 95, 1),
                                           )),
                                           child: Column(
                                             mainAxisAlignment:
@@ -875,32 +902,31 @@ class _InvoicesState extends State<Invoices> {
                                                     MainAxisAlignment
                                                         .spaceAround,
                                                 children: [
-                                                  Row(
-                                                    children: [
-                                                      Icon(
-                                                        Icons.person,
-                                                        size: 18,
-                                                        color: Color.fromRGBO(
-                                                            235, 118, 189, 1),
-                                                      ),
-                                                      Text(
-                                                        "  " +
-                                                            data.docs[index][
-                                                                'CustomerName'],
-                                                        style: TextStyle(
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 8.0, right: 8),
+                                                    child: Row(
+                                                      children: [
+                                                        Icon(
+                                                          Icons.person,
+                                                          size: 18,
                                                           color: Color.fromRGBO(
-                                                              235, 118, 189, 1),
+                                                              23, 25, 95, 1),
                                                         ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                  Text(
-                                                    "Post Code: " +
-                                                        data.docs[index]['code']
-                                                            .toString(),
-                                                    style: TextStyle(
-                                                      color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
+                                                        Text(
+                                                          "  " +
+                                                              data.docs[index][
+                                                                  'CustomerName'],
+                                                          style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    23,
+                                                                    25,
+                                                                    95,
+                                                                    1),
+                                                          ),
+                                                        )
+                                                      ],
                                                     ),
                                                   ),
                                                   Text(
@@ -910,7 +936,7 @@ class _InvoicesState extends State<Invoices> {
                                                             .substring(1, 7),
                                                     style: TextStyle(
                                                       color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
+                                                          23, 25, 95, 1),
                                                     ),
                                                   )
                                                 ],
@@ -928,20 +954,19 @@ class _InvoicesState extends State<Invoices> {
                                                           Icons.phone,
                                                           size: 18,
                                                           color: Color.fromRGBO(
-                                                              235, 118, 189, 1),
+                                                              23, 25, 95, 1),
                                                         ),
                                                         Text(
                                                           "  " +
                                                               data.docs[index]
                                                                   ['phoneNo2'],
                                                           style: TextStyle(
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    235,
-                                                                    118,
-                                                                    189,
-                                                                    1),
-                                                          ),
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      23,
+                                                                      25,
+                                                                      95,
+                                                                      1)),
                                                         )
                                                       ],
                                                     ),
@@ -956,9 +981,9 @@ class _InvoicesState extends State<Invoices> {
                                                             size: 18,
                                                             color:
                                                                 Color.fromRGBO(
-                                                                    235,
-                                                                    118,
-                                                                    189,
+                                                                    23,
+                                                                    25,
+                                                                    95,
                                                                     1),
                                                           ),
                                                           Text(
@@ -967,13 +992,12 @@ class _InvoicesState extends State<Invoices> {
                                                                     [
                                                                     'phoneNo2'],
                                                             style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      235,
-                                                                      118,
-                                                                      189,
-                                                                      1),
-                                                            ),
+                                                                color: Color
+                                                                    .fromRGBO(
+                                                                        23,
+                                                                        25,
+                                                                        95,
+                                                                        1)),
                                                           )
                                                         ],
                                                       ),
@@ -991,7 +1015,7 @@ class _InvoicesState extends State<Invoices> {
                                                         Icons.pin_drop_outlined,
                                                         size: 18,
                                                         color: Color.fromRGBO(
-                                                            235, 118, 189, 1),
+                                                            23, 25, 95, 1),
                                                       ),
                                                     ),
                                                     Expanded(
@@ -1002,7 +1026,7 @@ class _InvoicesState extends State<Invoices> {
                                                             .ellipsis,
                                                         style: TextStyle(
                                                           color: Color.fromRGBO(
-                                                              235, 118, 189, 1),
+                                                              23, 25, 95, 1),
                                                         ),
                                                       ),
                                                     )
@@ -1019,7 +1043,7 @@ class _InvoicesState extends State<Invoices> {
                                                         Icons.date_range,
                                                         size: 18,
                                                         color: Color.fromRGBO(
-                                                            235, 118, 189, 1),
+                                                            23, 25, 95, 1),
                                                       ),
                                                     ),
                                                     Expanded(
@@ -1030,7 +1054,7 @@ class _InvoicesState extends State<Invoices> {
                                                             .ellipsis,
                                                         style: TextStyle(
                                                           color: Color.fromRGBO(
-                                                              235, 118, 189, 1),
+                                                              23, 25, 95, 1),
                                                         ),
                                                       ),
                                                     )
@@ -1051,7 +1075,7 @@ class _InvoicesState extends State<Invoices> {
                                                               .toString(),
                                                       style: TextStyle(
                                                         color: Color.fromRGBO(
-                                                            235, 118, 189, 1),
+                                                            23, 25, 95, 1),
                                                       ),
                                                     ),
                                                   ),
@@ -1061,9 +1085,9 @@ class _InvoicesState extends State<Invoices> {
                                                           style: TextStyle(
                                                             color:
                                                                 Color.fromRGBO(
-                                                                    235,
-                                                                    118,
-                                                                    189,
+                                                                    23,
+                                                                    25,
+                                                                    95,
                                                                     1),
                                                           ),
                                                         )
@@ -1072,9 +1096,9 @@ class _InvoicesState extends State<Invoices> {
                                                           style: TextStyle(
                                                             color:
                                                                 Color.fromRGBO(
-                                                                    235,
-                                                                    118,
-                                                                    189,
+                                                                    23,
+                                                                    25,
+                                                                    95,
                                                                     1),
                                                           ),
                                                         ),
@@ -1103,7 +1127,7 @@ class _InvoicesState extends State<Invoices> {
                                                         fontWeight:
                                                             FontWeight.w700,
                                                         color: Color.fromRGBO(
-                                                            235, 118, 189, 1),
+                                                            23, 25, 95, 1),
                                                       ),
                                                     ),
                                                   ),
@@ -1140,9 +1164,9 @@ class _InvoicesState extends State<Invoices> {
                                                                 fontSize: 10,
                                                                 color: Color
                                                                     .fromRGBO(
-                                                                        235,
-                                                                        118,
-                                                                        189,
+                                                                        23,
+                                                                        25,
+                                                                        95,
                                                                         1),
                                                               ),
                                                             ),
@@ -1171,11 +1195,12 @@ class _InvoicesState extends State<Invoices> {
                                                                         TextStyle(
                                                                       fontSize:
                                                                           10,
-                                                                      color: Color.fromRGBO(
-                                                                          235,
-                                                                          118,
-                                                                          189,
-                                                                          1),
+                                                                      color: Color
+                                                                          .fromRGBO(
+                                                                              23,
+                                                                              25,
+                                                                              95,
+                                                                              1),
                                                                     ),
                                                                   ),
                                                                   onPressed:
@@ -1228,9 +1253,9 @@ class _InvoicesState extends State<Invoices> {
                                                                           .black38,
                                                                   color: Color
                                                                       .fromRGBO(
-                                                                          235,
-                                                                          118,
-                                                                          189,
+                                                                          23,
+                                                                          25,
+                                                                          95,
                                                                           1),
                                                                 ))
                                                       ],
@@ -1255,7 +1280,7 @@ class _InvoicesState extends State<Invoices> {
                       ? Container(
                           height: height * 0.9,
                           width: width,
-                          color: Color.fromRGBO(235, 118, 189, 0.1),
+                          color: Color.fromRGBO(23, 25, 95, 0.1),
                           child: Center(
                             child: Neumorphic(
                               style: NeumorphicStyle(color: Colors.white),
@@ -1269,8 +1294,8 @@ class _InvoicesState extends State<Invoices> {
                                       Text(
                                         "Confirmation",
                                         style: TextStyle(
-                                            color: Color.fromRGBO(
-                                                235, 118, 189, 1),
+                                            color:
+                                                Color.fromRGBO(23, 25, 95, 1),
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold),
                                         textAlign: TextAlign.center,
@@ -1281,8 +1306,8 @@ class _InvoicesState extends State<Invoices> {
                                       Text(
                                         "Is this order dilivered?",
                                         style: TextStyle(
-                                            color: Color.fromRGBO(
-                                                235, 118, 189, 1),
+                                            color:
+                                                Color.fromRGBO(23, 25, 95, 1),
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold),
                                         textAlign: TextAlign.center,
@@ -1308,7 +1333,7 @@ class _InvoicesState extends State<Invoices> {
                                                       style: TextStyle(
                                                         fontSize: 12,
                                                         color: Color.fromRGBO(
-                                                            235, 118, 189, 1),
+                                                            23, 25, 95, 1),
                                                       ),
                                                     ),
                                                     onPressed: () {
@@ -1343,7 +1368,7 @@ class _InvoicesState extends State<Invoices> {
                                                       shadowDarkColor:
                                                           Colors.black38,
                                                       color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
+                                                          23, 25, 95, 1),
                                                     ))
                                               ],
                                             ),
@@ -1359,7 +1384,7 @@ class _InvoicesState extends State<Invoices> {
                           ? Container(
                               height: height * 0.9,
                               width: width,
-                              color: Color.fromRGBO(235, 118, 189, 0.1),
+                              color: Color.fromRGBO(23, 25, 95, 0.1),
                               child: Center(
                                 child: Neumorphic(
                                   style: NeumorphicStyle(color: Colors.white),
@@ -1375,7 +1400,7 @@ class _InvoicesState extends State<Invoices> {
                                             "Detail",
                                             style: TextStyle(
                                                 color: Color.fromRGBO(
-                                                    235, 118, 189, 1),
+                                                    23, 25, 95, 1),
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold),
                                             textAlign: TextAlign.center,
@@ -1396,69 +1421,77 @@ class _InvoicesState extends State<Invoices> {
                                                         MainAxisAlignment
                                                             .spaceAround,
                                                     children: [
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceAround,
-                                                        children: [
-                                                          Row(
-                                                            children: [
-                                                              Icon(
-                                                                Icons.person,
-                                                                size: 18,
-                                                                color: Color
-                                                                    .fromRGBO(
-                                                                        235,
-                                                                        118,
-                                                                        189,
-                                                                        1),
-                                                              ),
-                                                              Text(
-                                                                "  " +
-                                                                    currentDoc[
-                                                                        'CustomerName'],
-                                                                style:
-                                                                    TextStyle(
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 8.0,
+                                                                right: 8),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                Icon(
+                                                                  Icons.person,
+                                                                  size: 18,
                                                                   color: Color
                                                                       .fromRGBO(
-                                                                          235,
-                                                                          118,
-                                                                          189,
+                                                                          23,
+                                                                          25,
+                                                                          95,
                                                                           1),
                                                                 ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                          Text(
-                                                            "Post Code: " +
-                                                                currentDoc[
-                                                                        'code']
-                                                                    .toString(),
-                                                            style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      235,
-                                                                      118,
-                                                                      189,
-                                                                      1),
+                                                                Text(
+                                                                  "  " +
+                                                                      currentDoc[
+                                                                          'CustomerName'],
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: Color
+                                                                        .fromRGBO(
+                                                                            23,
+                                                                            25,
+                                                                            95,
+                                                                            1),
+                                                                  ),
+                                                                )
+                                                              ],
                                                             ),
-                                                          ),
-                                                          Text(
-                                                            " Invoice No: " +
-                                                                currentDoc.id
-                                                                    .toString()
-                                                                    .substring(
-                                                                        1, 7),
-                                                            style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      235,
-                                                                      118,
-                                                                      189,
-                                                                      1),
+                                                            Text(
+                                                              " Invoice No: " +
+                                                                  currentDoc.id
+                                                                      .toString()
+                                                                      .substring(
+                                                                          1, 7),
+                                                              style: TextStyle(
+                                                                color: Color
+                                                                    .fromRGBO(
+                                                                        23,
+                                                                        25,
+                                                                        95,
+                                                                        1),
+                                                              ),
                                                             ),
-                                                          )
-                                                        ],
+                                                            IconButton(
+                                                                icon: Icon(
+                                                                    Icons.note,
+                                                                    size: 20,
+                                                                    color: Color
+                                                                        .fromRGBO(
+                                                                            23,
+                                                                            25,
+                                                                            95,
+                                                                            1)),
+                                                                onPressed: () {
+                                                                  showAlertDialog(
+                                                                      context,
+                                                                      currentDoc[
+                                                                          'note']);
+                                                                }),
+                                                          ],
+                                                        ),
                                                       ),
                                                       Container(
                                                         padding:
@@ -1477,9 +1510,9 @@ class _InvoicesState extends State<Invoices> {
                                                                   size: 18,
                                                                   color: Color
                                                                       .fromRGBO(
-                                                                          235,
-                                                                          118,
-                                                                          189,
+                                                                          23,
+                                                                          25,
+                                                                          95,
                                                                           1),
                                                                 ),
                                                                 Text(
@@ -1490,9 +1523,9 @@ class _InvoicesState extends State<Invoices> {
                                                                       TextStyle(
                                                                     color: Color
                                                                         .fromRGBO(
-                                                                            235,
-                                                                            118,
-                                                                            189,
+                                                                            23,
+                                                                            25,
+                                                                            95,
                                                                             1),
                                                                   ),
                                                                 )
@@ -1511,9 +1544,9 @@ class _InvoicesState extends State<Invoices> {
                                                                     size: 18,
                                                                     color: Color
                                                                         .fromRGBO(
-                                                                            235,
-                                                                            118,
-                                                                            189,
+                                                                            23,
+                                                                            25,
+                                                                            95,
                                                                             1),
                                                                   ),
                                                                   Text(
@@ -1522,11 +1555,12 @@ class _InvoicesState extends State<Invoices> {
                                                                             'phoneNo2'],
                                                                     style:
                                                                         TextStyle(
-                                                                      color: Color.fromRGBO(
-                                                                          235,
-                                                                          118,
-                                                                          189,
-                                                                          1),
+                                                                      color: Color
+                                                                          .fromRGBO(
+                                                                              23,
+                                                                              25,
+                                                                              95,
+                                                                              1),
                                                                     ),
                                                                   )
                                                                 ],
@@ -1550,9 +1584,9 @@ class _InvoicesState extends State<Invoices> {
                                                                 size: 18,
                                                                 color: Color
                                                                     .fromRGBO(
-                                                                        235,
-                                                                        118,
-                                                                        189,
+                                                                        23,
+                                                                        25,
+                                                                        95,
                                                                         1),
                                                               ),
                                                             ),
@@ -1567,9 +1601,9 @@ class _InvoicesState extends State<Invoices> {
                                                                     TextStyle(
                                                                   color: Color
                                                                       .fromRGBO(
-                                                                          235,
-                                                                          118,
-                                                                          189,
+                                                                          23,
+                                                                          25,
+                                                                          95,
                                                                           1),
                                                                 ),
                                                               ),
@@ -1592,7 +1626,7 @@ class _InvoicesState extends State<Invoices> {
                                                           Icons.date_range,
                                                           size: 18,
                                                           color: Color.fromRGBO(
-                                                              235, 118, 189, 1),
+                                                              23, 25, 95, 1),
                                                         ),
                                                       ),
                                                       Expanded(
@@ -1604,9 +1638,9 @@ class _InvoicesState extends State<Invoices> {
                                                           style: TextStyle(
                                                             color:
                                                                 Color.fromRGBO(
-                                                                    235,
-                                                                    118,
-                                                                    189,
+                                                                    23,
+                                                                    25,
+                                                                    95,
                                                                     1),
                                                           ),
                                                         ),
@@ -1628,7 +1662,7 @@ class _InvoicesState extends State<Invoices> {
                                                                 .toString(),
                                                         style: TextStyle(
                                                           color: Color.fromRGBO(
-                                                              235, 118, 189, 1),
+                                                              23, 25, 95, 1),
                                                         ),
                                                       ),
                                                     ),
@@ -1638,9 +1672,9 @@ class _InvoicesState extends State<Invoices> {
                                                             style: TextStyle(
                                                               color: Color
                                                                   .fromRGBO(
-                                                                      235,
-                                                                      118,
-                                                                      189,
+                                                                      23,
+                                                                      25,
+                                                                      95,
                                                                       1),
                                                             ),
                                                           )
@@ -1649,9 +1683,9 @@ class _InvoicesState extends State<Invoices> {
                                                             style: TextStyle(
                                                               color: Color
                                                                   .fromRGBO(
-                                                                      235,
-                                                                      118,
-                                                                      189,
+                                                                      23,
+                                                                      25,
+                                                                      95,
                                                                       1),
                                                             ),
                                                           ),
@@ -1676,22 +1710,6 @@ class _InvoicesState extends State<Invoices> {
                                                               .length,
                                                           itemBuilder:
                                                               (context, index) {
-                                                            print(currentDoc[
-                                                                'totalCI']);
-                                                            print(currentDoc[
-                                                                'totalBuy']);
-                                                            print(currentDoc[
-                                                                    'totalCI'] +
-                                                                currentDoc[
-                                                                    'totalBuy']);
-
-                                                            print((((currentDoc['totalCI'] +
-                                                                            currentDoc[
-                                                                                'totalBuy']) /
-                                                                        currentDoc[
-                                                                            'totalCI'])
-                                                                    .round() *
-                                                                10));
                                                             return Container(
                                                               child: Column(
                                                                 crossAxisAlignment:
@@ -1707,26 +1725,31 @@ class _InvoicesState extends State<Invoices> {
                                                                             'name'],
                                                                     style:
                                                                         TextStyle(
-                                                                      color: Color.fromRGBO(
-                                                                          235,
-                                                                          118,
-                                                                          189,
-                                                                          1),
+                                                                      color: Color
+                                                                          .fromRGBO(
+                                                                              23,
+                                                                              25,
+                                                                              95,
+                                                                              1),
                                                                     ),
                                                                   ),
                                                                   Text(
                                                                     currentDoc["productSell"][index]['priceI'].toStringAsFixed(
                                                                             1) +
-                                                                        " IQD      -      " +
+                                                                        " IQD      -      Qtd:  " +
                                                                         currentDoc["productSell"][index]['quantity']
+                                                                            .toString() +
+                                                                        "       -     code:  " +
+                                                                        currentDoc["productSell"][index]['code']
                                                                             .toString(),
                                                                     style:
                                                                         TextStyle(
-                                                                      color: Color.fromRGBO(
-                                                                          235,
-                                                                          118,
-                                                                          189,
-                                                                          1),
+                                                                      color: Color
+                                                                          .fromRGBO(
+                                                                              23,
+                                                                              25,
+                                                                              95,
+                                                                              1),
                                                                     ),
                                                                   ),
                                                                   SizedBox(
@@ -1765,7 +1788,7 @@ class _InvoicesState extends State<Invoices> {
                                                             " IQD",
                                                         style: TextStyle(
                                                           color: Color.fromRGBO(
-                                                              235, 118, 189, 1),
+                                                              23, 25, 95, 1),
                                                         ),
                                                       ),
                                                     ),
@@ -1786,7 +1809,7 @@ class _InvoicesState extends State<Invoices> {
                                                             " IQD",
                                                         style: TextStyle(
                                                           color: Color.fromRGBO(
-                                                              235, 118, 189, 1),
+                                                              23, 25, 95, 1),
                                                         ),
                                                       ),
                                                     ),
@@ -1808,7 +1831,7 @@ class _InvoicesState extends State<Invoices> {
                                                             " IQD",
                                                         style: TextStyle(
                                                           color: Color.fromRGBO(
-                                                              235, 118, 189, 1),
+                                                              23, 25, 95, 1),
                                                         ),
                                                       ),
                                                     ),
@@ -1824,9 +1847,9 @@ class _InvoicesState extends State<Invoices> {
                                                               style: TextStyle(
                                                                 color: Color
                                                                     .fromRGBO(
-                                                                        235,
-                                                                        118,
-                                                                        189,
+                                                                        23,
+                                                                        25,
+                                                                        95,
                                                                         1),
                                                               ),
                                                             )
@@ -1840,9 +1863,9 @@ class _InvoicesState extends State<Invoices> {
                                                               style: TextStyle(
                                                                 color: Color
                                                                     .fromRGBO(
-                                                                        235,
-                                                                        118,
-                                                                        189,
+                                                                        23,
+                                                                        25,
+                                                                        95,
                                                                         1),
                                                               ),
                                                             ),
@@ -1875,7 +1898,7 @@ class _InvoicesState extends State<Invoices> {
                                                           fontWeight:
                                                               FontWeight.w700,
                                                           color: Color.fromRGBO(
-                                                              235, 118, 189, 1),
+                                                              23, 25, 95, 1),
                                                         ),
                                                       ),
                                                     ),
@@ -1900,7 +1923,7 @@ class _InvoicesState extends State<Invoices> {
                                                       fontWeight:
                                                           FontWeight.w700,
                                                       color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
+                                                          23, 25, 95, 1),
                                                     ),
                                                   ),
                                                 ),
@@ -1934,7 +1957,7 @@ class _InvoicesState extends State<Invoices> {
                                                           shadowDarkColor:
                                                               Colors.black38,
                                                           color: Color.fromRGBO(
-                                                              235, 118, 189, 1),
+                                                              23, 25, 95, 1),
                                                         ))
                                                   ],
                                                 ),
@@ -1949,7 +1972,7 @@ class _InvoicesState extends State<Invoices> {
                           : Container(
                               height: height * 0.9,
                               width: width,
-                              color: Color.fromRGBO(235, 118, 189, 0.1),
+                              color: Color.fromRGBO(23, 25, 95, 0.1),
                               child: Center(
                                 child: Neumorphic(
                                   style: NeumorphicStyle(color: Colors.white),
@@ -1965,7 +1988,7 @@ class _InvoicesState extends State<Invoices> {
                                             "Information",
                                             style: TextStyle(
                                                 color: Color.fromRGBO(
-                                                    235, 118, 189, 1),
+                                                    23, 25, 95, 1),
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold),
                                             textAlign: TextAlign.center,
@@ -1977,7 +2000,7 @@ class _InvoicesState extends State<Invoices> {
                                             "Are you sure to delete this order?",
                                             style: TextStyle(
                                                 color: Color.fromRGBO(
-                                                    235, 118, 189, 1),
+                                                    23, 25, 95, 1),
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold),
                                             textAlign: TextAlign.center,
@@ -2004,9 +2027,9 @@ class _InvoicesState extends State<Invoices> {
                                                             fontSize: 12,
                                                             color:
                                                                 Color.fromRGBO(
-                                                                    235,
-                                                                    118,
-                                                                    189,
+                                                                    23,
+                                                                    25,
+                                                                    95,
                                                                     1),
                                                           ),
                                                         ),
@@ -2098,7 +2121,7 @@ class _InvoicesState extends State<Invoices> {
                                                           shadowDarkColor:
                                                               Colors.black38,
                                                           color: Color.fromRGBO(
-                                                              235, 118, 189, 1),
+                                                              23, 25, 95, 1),
                                                         ))
                                                   ],
                                                 ),
@@ -2110,6 +2133,49 @@ class _InvoicesState extends State<Invoices> {
                                 ),
                               ),
                             ),
+              Positioned(
+                bottom: height * 0.05,
+                right: width * 0.4,
+                child: Container(
+                    height: height * 0.05,
+                    width: width * 0.2,
+                    child: NeumorphicButton(
+                      child: Center(
+                        child: Icon(
+                          Icons.add,
+                          color: Colors.white,
+                        ),
+                      ),
+                      onPressed: () {
+                        List<DocumentSnapshot> thisPost;
+                        int code;
+                        FirebaseFirestore.instance
+                            .collection('code')
+                            .get()
+                            .then((value) {
+                          code = value.docs[0].data()['code'];
+                        }).whenComplete(() {
+                          FirebaseFirestore.instance
+                              .collection('posts')
+                              .where('code', isEqualTo: code)
+                              .get()
+                              .then((proVal) {
+                            thisPost = proVal.docs;
+
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (ctx) => SellScreen(
+                                          postId: proVal.docs.first.id,
+                                        )));
+                          });
+                        });
+                      },
+                      style: NeumorphicStyle(
+                          color: Color.fromRGBO(23, 25, 95, 1),
+                          border: NeumorphicBorder.none()),
+                    )),
+              ),
             ],
           ),
         ),

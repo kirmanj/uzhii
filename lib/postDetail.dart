@@ -85,7 +85,6 @@ class _PostDetailState extends State<PostDetail> {
                         MaterialPageRoute(
                             builder: (ctx) => SellScreen(
                                   postId: widget.post.id,
-                                  remainProducts: remainQtd,
                                 )));
                   },
                   child: Padding(
@@ -93,12 +92,12 @@ class _PostDetailState extends State<PostDetail> {
                     child: Neumorphic(
                       child: Container(
                         width: width * 0.2,
-                        color: Color.fromRGBO(235, 118, 189, 1),
+                        color: Color.fromRGBO(23, 25, 95, 1),
                         height: 20,
                         child: Center(
                           child: Text(
                             "SELL",
-                            style: TextStyle(fontSize: 16, color: Colors.white),
+                            style: TextStyle(fontSize: 14, color: Colors.white),
                           ),
                         ),
                       ),
@@ -127,12 +126,12 @@ class _PostDetailState extends State<PostDetail> {
                     child: Neumorphic(
                       child: Container(
                         width: width * 0.2,
-                        color: Color.fromRGBO(235, 118, 189, 1),
+                        color: Color.fromRGBO(23, 25, 95, 1),
                         height: 20,
                         child: Center(
                           child: Text(
                             "ARRIVE",
-                            style: TextStyle(fontSize: 16, color: Colors.white),
+                            style: TextStyle(fontSize: 14, color: Colors.white),
                           ),
                         ),
                       ),
@@ -143,12 +142,11 @@ class _PostDetailState extends State<PostDetail> {
         backgroundColor: Colors.white,
         title: Text(
           "Code:  " + widget.post['code'].toString(),
-          style:
-              TextStyle(fontSize: 20, color: Color.fromRGBO(235, 118, 189, 1)),
+          style: TextStyle(fontSize: 20, color: Color.fromRGBO(23, 25, 95, 1)),
         ),
         leading: IconButton(
             icon: Icon(Icons.arrow_back_ios,
-                color: Color.fromRGBO(235, 118, 189, 1)),
+                color: Color.fromRGBO(23, 25, 95, 1)),
             onPressed: () {
               Navigator.pop(context);
             }),
@@ -166,50 +164,49 @@ class _PostDetailState extends State<PostDetail> {
                   widget.post['totalP'].toStringAsFixed(0).replaceAllMapped(
                       RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
                       (Match m) => '${m[1]},'),
-              style: TextStyle(
-                  fontSize: 18, color: Color.fromRGBO(235, 118, 189, 1)),
+              style:
+                  TextStyle(fontSize: 18, color: Color.fromRGBO(23, 25, 95, 1)),
             ),
             Text(
               "IQD Price: " +
                   widget.post['totalI'].toStringAsFixed(0).replaceAllMapped(
                       RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
                       (Match m) => '${m[1]},'),
-              style: TextStyle(
-                  fontSize: 18, color: Color.fromRGBO(235, 118, 189, 1)),
+              style:
+                  TextStyle(fontSize: 18, color: Color.fromRGBO(23, 25, 95, 1)),
             ),
             Text("No Of Products: " + widget.post['noOfProducts'].toString(),
                 style: TextStyle(
-                    fontSize: 18, color: Color.fromRGBO(235, 118, 189, 1))),
+                    fontSize: 18, color: Color.fromRGBO(23, 25, 95, 1))),
             widget.post['state'] == 0
                 ? Text(
                     "State: Not Arrived",
                     style: TextStyle(
-                        fontSize: 18, color: Color.fromRGBO(235, 118, 189, 1)),
+                        fontSize: 18, color: Color.fromRGBO(23, 25, 95, 1)),
                   )
                 : Text(
                     "State: Arrived",
                     style: TextStyle(
-                        fontSize: 18, color: Color.fromRGBO(235, 118, 189, 1)),
+                        fontSize: 18, color: Color.fromRGBO(23, 25, 95, 1)),
                   ),
             Text(
               "Sending Date: " + widget.post['sendingDate'].toString(),
-              style: TextStyle(
-                  fontSize: 18, color: Color.fromRGBO(235, 118, 189, 1)),
+              style:
+                  TextStyle(fontSize: 18, color: Color.fromRGBO(23, 25, 95, 1)),
             ),
             Row(
               children: [
                 Text("Arriving Date: ",
                     style: TextStyle(
-                        fontSize: 18, color: Color.fromRGBO(235, 118, 189, 1))),
+                        fontSize: 18, color: Color.fromRGBO(23, 25, 95, 1))),
                 (formattedDate != null)
                     ? Text(formattedDate,
                         style: TextStyle(
-                            fontSize: 18,
-                            color: Color.fromRGBO(235, 118, 189, 1)))
+                            fontSize: 18, color: Color.fromRGBO(23, 25, 95, 1)))
                     : Text(widget.post['arrivingDate'].toString(),
                         style: TextStyle(
                             fontSize: 18,
-                            color: Color.fromRGBO(235, 118, 189, 1))),
+                            color: Color.fromRGBO(23, 25, 95, 1))),
               ],
             ),
             Row(
@@ -217,14 +214,14 @@ class _PostDetailState extends State<PostDetail> {
                 Text(
                   "Sold Out Date: ",
                   style: TextStyle(
-                      fontSize: 18, color: Color.fromRGBO(235, 118, 189, 1)),
+                      fontSize: 18, color: Color.fromRGBO(23, 25, 95, 1)),
                 ),
                 Text(
                   "Sold Out Date: " + widget.post['soldOutDate'] != 'empty'
                       ? "not sold out"
                       : widget.post['soldOutDate'].toString(),
                   style: TextStyle(
-                      fontSize: 18, color: Color.fromRGBO(235, 118, 189, 1)),
+                      fontSize: 18, color: Color.fromRGBO(23, 25, 95, 1)),
                 ),
               ],
             ),
@@ -247,7 +244,7 @@ class _PostDetailState extends State<PostDetail> {
                                   right: width * 0.02),
                               child: Neumorphic(
                                 style: NeumorphicStyle(
-                                    color: Color.fromRGBO(235, 118, 189, 1)),
+                                    color: Color.fromRGBO(23, 25, 95, 1)),
                                 child: Center(
                                   child: Container(
                                     child: Column(
@@ -259,7 +256,7 @@ class _PostDetailState extends State<PostDetail> {
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontSize: 16,
+                                              fontSize: 14,
                                               fontWeight: FontWeight.bold),
                                           textAlign: TextAlign.center,
                                         ),

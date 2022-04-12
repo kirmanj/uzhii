@@ -60,7 +60,7 @@ class _ProductsState extends State<Products> {
                     child: Text(
                       "PRODUCTS",
                       style: TextStyle(
-                        color: Color.fromRGBO(235, 118, 189, 1),
+                        color: Color.fromRGBO(23, 25, 95, 1),
                         fontSize: 18,
                       ),
                       textAlign: TextAlign.center,
@@ -74,6 +74,7 @@ class _ProductsState extends State<Products> {
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection('products')
+                        .orderBy("name")
                         .snapshots(),
                     builder: (context, snapshot) {
                       QuerySnapshot data = snapshot.data;
@@ -85,7 +86,7 @@ class _ProductsState extends State<Products> {
                             height: 25,
                             child: CircularProgressIndicator(
                               valueColor: AlwaysStoppedAnimation<Color>(
-                                Color.fromRGBO(235, 118, 189, 1),
+                                Color.fromRGBO(23, 25, 95, 1),
                               ),
                             ),
                           ),
@@ -118,8 +119,8 @@ class _ProductsState extends State<Products> {
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
                                                 color: Color.fromRGBO(
-                                                    235, 118, 189, 1),
-                                                fontSize: 18,
+                                                    23, 25, 95, 1),
+                                                fontSize: 14,
                                                 fontWeight: FontWeight.bold),
                                             textAlign: TextAlign.center,
                                           ),
@@ -134,8 +135,8 @@ class _ProductsState extends State<Products> {
                                                 data.docs[index]["quantity"]
                                                     .toString(),
                                             style: TextStyle(
-                                              color: Color.fromRGBO(
-                                                  235, 118, 189, 1),
+                                              color:
+                                                  Color.fromRGBO(23, 25, 95, 1),
                                             ),
                                             textAlign: TextAlign.center,
                                           )
@@ -173,7 +174,7 @@ class _ProductsState extends State<Products> {
                                   });
                                 },
                                 style: NeumorphicStyle(
-                                    color: Color.fromRGBO(235, 118, 189, 1),
+                                    color: Color.fromRGBO(23, 25, 95, 1),
                                     border: NeumorphicBorder.none()),
                               )),
                         ),
@@ -184,7 +185,7 @@ class _ProductsState extends State<Products> {
                       : Container(
                           height: height * 0.9,
                           width: width,
-                          color: Color.fromRGBO(235, 118, 189, 0.1),
+                          color: Color.fromRGBO(23, 25, 95, 0.1),
                           child: Center(
                             child: Neumorphic(
                               style: NeumorphicStyle(color: Colors.white),
@@ -198,8 +199,8 @@ class _ProductsState extends State<Products> {
                                       Text(
                                         "ADD PRODUCT",
                                         style: TextStyle(
-                                            color: Color.fromRGBO(
-                                                235, 118, 189, 1),
+                                            color:
+                                                Color.fromRGBO(23, 25, 95, 1),
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold),
                                         textAlign: TextAlign.center,
@@ -212,8 +213,8 @@ class _ProductsState extends State<Products> {
                                         color: Colors.white,
                                         child: TextFormField(
                                           style: TextStyle(
-                                            color: Color.fromRGBO(
-                                                235, 118, 189, 1),
+                                            color:
+                                                Color.fromRGBO(23, 25, 95, 1),
                                           ),
                                           validator: (val) {
                                             if (val.isEmpty) {
@@ -229,12 +230,12 @@ class _ProductsState extends State<Products> {
                                               labelText: "Name",
                                               labelStyle: TextStyle(
                                                 color: Color.fromRGBO(
-                                                    235, 118, 189, 1),
+                                                    23, 25, 95, 1),
                                               ),
                                               hintText: 'Name',
                                               hintStyle: TextStyle(
                                                   color: Color.fromRGBO(
-                                                      235, 118, 189, 1)),
+                                                      23, 25, 95, 1)),
                                               contentPadding:
                                                   EdgeInsets.fromLTRB(
                                                       20.0, 10.0, 20.0, 10.0),
@@ -242,7 +243,7 @@ class _ProductsState extends State<Products> {
                                                   const OutlineInputBorder(
                                                 borderSide: const BorderSide(
                                                     color: Color.fromRGBO(
-                                                        235, 118, 189, 1),
+                                                        23, 25, 95, 1),
                                                     width: 0.0),
                                               )),
                                         ),
@@ -255,8 +256,8 @@ class _ProductsState extends State<Products> {
                                         color: Colors.white,
                                         child: TextFormField(
                                           style: TextStyle(
-                                            color: Color.fromRGBO(
-                                                235, 118, 189, 1),
+                                            color:
+                                                Color.fromRGBO(23, 25, 95, 1),
                                           ),
                                           onChanged: (text) {
                                             print('First text field: $text');
@@ -282,12 +283,12 @@ class _ProductsState extends State<Products> {
                                               labelText: "Price",
                                               labelStyle: TextStyle(
                                                 color: Color.fromRGBO(
-                                                    235, 118, 189, 1),
+                                                    23, 25, 95, 1),
                                               ),
                                               hintText: 'Price',
                                               hintStyle: TextStyle(
                                                   color: Color.fromRGBO(
-                                                      235, 118, 189, 1)),
+                                                      23, 25, 95, 1)),
                                               contentPadding:
                                                   EdgeInsets.fromLTRB(
                                                       20.0, 10.0, 20.0, 10.0),
@@ -295,7 +296,7 @@ class _ProductsState extends State<Products> {
                                                   const OutlineInputBorder(
                                                 borderSide: const BorderSide(
                                                     color: Color.fromRGBO(
-                                                        235, 118, 189, 1),
+                                                        23, 25, 95, 1),
                                                     width: 0.0),
                                               )),
                                         ),
@@ -317,7 +318,7 @@ class _ProductsState extends State<Products> {
                                                         " IQD",
                                                 style: TextStyle(
                                                     color: Color.fromRGBO(
-                                                        235, 118, 189, 1)),
+                                                        23, 25, 95, 1)),
                                               ),
                                             )),
                                       ),
@@ -351,8 +352,8 @@ class _ProductsState extends State<Products> {
                                             });
                                           },
                                           style: NeumorphicStyle(
-                                            color: Color.fromRGBO(
-                                                235, 118, 189, 1),
+                                            color:
+                                                Color.fromRGBO(23, 25, 95, 1),
                                           ))
                                     ],
                                   )),
@@ -373,7 +374,7 @@ class _ProductsState extends State<Products> {
                                 child: Center(
                                   child: Icon(
                                     Icons.close,
-                                    color: Color.fromRGBO(235, 118, 189, 1),
+                                    color: Color.fromRGBO(23, 25, 95, 1),
                                   ),
                                 ),
                                 onPressed: () {

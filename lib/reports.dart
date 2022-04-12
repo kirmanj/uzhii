@@ -290,7 +290,7 @@ class _RepostsState extends State<Reposts> {
                               });
                             },
                             style: NeumorphicStyle(
-                                color: Color.fromRGBO(235, 118, 189, 1)),
+                                color: Color.fromRGBO(23, 25, 95,  1)),
                           ),
                           SizedBox(
                             height: 15,
@@ -309,7 +309,7 @@ class _RepostsState extends State<Reposts> {
                               });
                             },
                             style: NeumorphicStyle(
-                                color: Color.fromRGBO(235, 118, 189, 1)),
+                                color: Color.fromRGBO(23, 25, 95,  1)),
                           ),
                           SizedBox(
                             height: 15,
@@ -327,7 +327,7 @@ class _RepostsState extends State<Reposts> {
                               });
                             },
                             style: NeumorphicStyle(
-                                color: Color.fromRGBO(235, 118, 189, 1)),
+                                color: Color.fromRGBO(23, 25, 95,  1)),
                           )
                         ],
                       ),
@@ -345,7 +345,7 @@ class _RepostsState extends State<Reposts> {
                               Text(
                                 "Profits",
                                 style: TextStyle(
-                                    color: Color.fromRGBO(235, 118, 189, 1),
+                                    color: Color.fromRGBO(23, 25, 95,  1),
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -356,7 +356,7 @@ class _RepostsState extends State<Reposts> {
                                 child: Container(
                                   padding: EdgeInsets.all(10),
                                   width: width * 0.9,
-                                  color: Color.fromRGBO(235, 118, 189, 1),
+                                  color: Color.fromRGBO(23, 25, 95,  1),
                                   child: Text(
                                     "Today:            " +
                                         todayP.toString().replaceAllMapped(
@@ -377,7 +377,7 @@ class _RepostsState extends State<Reposts> {
                                 child: Container(
                                   padding: EdgeInsets.all(10),
                                   width: width * 0.9,
-                                  color: Color.fromRGBO(235, 118, 189, 1),
+                                  color: Color.fromRGBO(23, 25, 95,  1),
                                   child: Text(
                                     "This Week:    " +
                                         lastWeek.toString().replaceAllMapped(
@@ -398,7 +398,7 @@ class _RepostsState extends State<Reposts> {
                                 child: Container(
                                   padding: EdgeInsets.all(10),
                                   width: width * 0.9,
-                                  color: Color.fromRGBO(235, 118, 189, 1),
+                                  color: Color.fromRGBO(23, 25, 95,  1),
                                   child: Text(
                                     "This Month:    " +
                                         lastMonth.toString().replaceAllMapped(
@@ -419,7 +419,7 @@ class _RepostsState extends State<Reposts> {
                                 child: Container(
                                   padding: EdgeInsets.all(10),
                                   width: width * 0.9,
-                                  color: Color.fromRGBO(235, 118, 189, 1),
+                                  color: Color.fromRGBO(23, 25, 95,  1),
                                   child: Text(
                                     "This Year:    " +
                                         lastYear.toString().replaceAllMapped(
@@ -497,7 +497,7 @@ class _RepostsState extends State<Reposts> {
                                                                     ((monthlyProfit[index]['profit'] /
                                                                         monthlyTotal)))),
                                                             color: Color.fromRGBO(
-                                                                235, 118, 189, 1),
+                                                                23, 25, 95,  1),
                                                             child: Text(
                                                                 monthlyProfit[index]['profit'].toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},') +
                                                                     " IQD",
@@ -525,7 +525,7 @@ class _RepostsState extends State<Reposts> {
                                                                     ((yearlyProfit[index]['profit'] / yearlyTotal) +
                                                                         0.1))),
                                                             color: Color.fromRGBO(
-                                                                235, 118, 189, 1),
+                                                                23, 25, 95,  1),
                                                             child: Text(
                                                                 yearlyProfit[index]['profit'].toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},') +
                                                                     " IQD",
@@ -555,14 +555,14 @@ class _RepostsState extends State<Reposts> {
                                     style: NeumorphicStyle(
                                         color: isYearly
                                             ? Colors.white
-                                            : Color.fromRGBO(235, 118, 189, 1)),
+                                            : Color.fromRGBO(23, 25, 95,  1)),
                                     child: Text("Yearly",
                                         style: TextStyle(
                                             fontSize: 12,
                                             color: !isYearly
                                                 ? Colors.white
                                                 : Color.fromRGBO(
-                                                    235, 118, 189, 1))),
+                                                    23, 25, 95,  1))),
                                   ),
                                   NeumorphicButton(
                                     onPressed: () {
@@ -573,14 +573,14 @@ class _RepostsState extends State<Reposts> {
                                     style: NeumorphicStyle(
                                         color: !isYearly
                                             ? Colors.white
-                                            : Color.fromRGBO(235, 118, 189, 1)),
+                                            : Color.fromRGBO(23, 25, 95,  1)),
                                     child: Text("Monthly",
                                         style: TextStyle(
                                             fontSize: 12,
                                             color: isYearly
                                                 ? Colors.white
                                                 : Color.fromRGBO(
-                                                    235, 118, 189, 1))),
+                                                    23, 25, 95,  1))),
                                   )
                                 ],
                               )
@@ -600,7 +600,7 @@ class _RepostsState extends State<Reposts> {
                                   Text(
                                     "Costumers",
                                     style: TextStyle(
-                                        color: Color.fromRGBO(235, 118, 189, 1),
+                                        color: Color.fromRGBO(23, 25, 95,  1),
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -629,7 +629,7 @@ class _RepostsState extends State<Reposts> {
                                                 padding: EdgeInsets.all(8.0),
                                                 child: Container(
                                                   color: Color.fromRGBO(
-                                                      235, 118, 189, 1),
+                                                      23, 25, 95,  1),
                                                   child: Column(
                                                     children: [
                                                       Padding(
@@ -704,7 +704,7 @@ class _RepostsState extends State<Reposts> {
                                   Text(
                                     "Products",
                                     style: TextStyle(
-                                      color: Color.fromRGBO(235, 118, 189, 1),
+                                      color: Color.fromRGBO(23, 25, 95,  1),
                                     ),
                                   )
                                 ],
@@ -723,7 +723,7 @@ class _RepostsState extends State<Reposts> {
                         child: Icon(
                           Icons.arrow_back_ios,
                           size: 14,
-                          color: Color.fromRGBO(235, 118, 189, 1),
+                          color: Color.fromRGBO(23, 25, 95,  1),
                         ),
                       ),
                     )
@@ -739,7 +739,7 @@ class _RepostsState extends State<Reposts> {
                         child: Icon(
                           Icons.arrow_back_ios,
                           size: 14,
-                          color: Color.fromRGBO(235, 118, 189, 1),
+                          color: Color.fromRGBO(23, 25, 95,  1),
                         ),
                       ),
                     ),

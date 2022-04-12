@@ -46,20 +46,24 @@ class UZHII extends StatefulWidget {
   _UZHIIState createState() => _UZHIIState();
 }
 
-PersistentTabController _controller = PersistentTabController(initialIndex: 3);
+PersistentTabController _controller = PersistentTabController(initialIndex: 4);
 
 List<Widget> _buildScreens() {
-  return [Invoices(), WareHouse(), Posts(), Products(), Profile()];
+  return userRole != 1
+      ? [WareHouse(), Posts(), Products(), Profile()]
+      : [Invoices(), WareHouse(), Posts(), Products(), Profile()];
 }
 
 List<PersistentBottomNavBarItem> _navBarsItems() {
   return [
-    PersistentBottomNavBarItem(
-      icon: Icon(Icons.request_page),
-      title: ("Invoice"),
-      activeColorPrimary: Colors.white,
-      inactiveColorPrimary: Colors.white,
-    ),
+    userRole != 1
+        ? Container()
+        : PersistentBottomNavBarItem(
+            icon: Icon(Icons.request_page),
+            title: ("Invoice"),
+            activeColorPrimary: Colors.white,
+            inactiveColorPrimary: Colors.white,
+          ),
     PersistentBottomNavBarItem(
       icon: Image.asset("images/warehouse.png"),
       title: ("WareHouse"),
@@ -114,7 +118,7 @@ class Screens extends StatelessWidget {
       items: _navBarsItems(),
       confineInSafeArea: true,
       backgroundColor:
-          Color.fromRGBO(235, 118, 189, 1), // Default is Colors.white.
+          Color.fromRGBO(23, 25, 95, 1), // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
       resizeToAvoidBottomInset:
           true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.

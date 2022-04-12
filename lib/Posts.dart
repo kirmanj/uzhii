@@ -4,6 +4,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:uzhii/Postscreen.dart';
 import 'package:uzhii/main.dart';
 import 'package:uzhii/postDetail.dart';
+import 'package:uzhii/postedit.dart';
 import 'package:uzhii/profile.dart';
 
 class Posts extends StatefulWidget {
@@ -32,8 +33,8 @@ class _PostsState extends State<Posts> {
                     child: Text(
                       "POSTS",
                       style: TextStyle(
-                        color: Color.fromRGBO(235, 118, 189, 1),
-                        fontSize: 18,
+                        color: Color.fromRGBO(23, 25, 95, 1),
+                        fontSize: 16,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -75,7 +76,7 @@ class _PostsState extends State<Posts> {
                                   padding: EdgeInsets.only(left: 10),
                                   style: NeumorphicStyle(
                                       border: NeumorphicBorder(
-                                    color: Color.fromRGBO(235, 118, 189, 1),
+                                    color: Color.fromRGBO(23, 25, 95, 1),
                                   )),
                                   child: Column(
                                     mainAxisAlignment:
@@ -92,34 +93,81 @@ class _PostsState extends State<Posts> {
                                                 data.docs[index]['code']
                                                     .toString(),
                                             style: TextStyle(
-                                              fontSize: 16,
+                                              fontSize: 14,
                                               fontWeight: FontWeight.bold,
-                                              color: Color.fromRGBO(
-                                                  235, 118, 189, 1),
+                                              color:
+                                                  Color.fromRGBO(23, 25, 95, 1),
                                             ),
                                           ),
-                                          Container(
-                                              width: 30,
-                                              height: 30,
-                                              child: IconButton(
-                                                  icon: Icon(
-                                                    Icons
-                                                        .arrow_forward_ios_sharp,
-                                                    size: 18,
-                                                    color: Color.fromRGBO(
-                                                        235, 118, 189, 1),
-                                                  ),
-                                                  onPressed: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (ctx) =>
-                                                                PostDetail(
-                                                                  post: data
-                                                                          .docs[
-                                                                      index],
-                                                                )));
-                                                  }))
+                                          Row(
+                                            children: [
+                                              Container(
+                                                  width: 30,
+                                                  height: 30,
+                                                  child: IconButton(
+                                                      icon: Icon(
+                                                        Icons.edit,
+                                                        size: 18,
+                                                        color: Color.fromRGBO(
+                                                            23, 25, 95, 1),
+                                                      ),
+                                                      onPressed: () {
+                                                        List<DocumentSnapshot>
+                                                            productsSnapshot;
+
+                                                        List<String>
+                                                            productString = [];
+                                                        FirebaseFirestore
+                                                            .instance
+                                                            .collection(
+                                                                'products')
+                                                            .snapshots()
+                                                            .listen((event) {
+                                                          productsSnapshot =
+                                                              event.docs;
+
+                                                          productsSnapshot
+                                                              .forEach(
+                                                                  (element) {
+                                                            productString.add(
+                                                                element[
+                                                                    'name']);
+                                                          });
+                                                        });
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder: (ctx) => PostEdit(
+                                                                    productString:
+                                                                        productString,
+                                                                    parentPost:
+                                                                        data.docs[
+                                                                            index])));
+                                                      })),
+                                              Container(
+                                                  width: 30,
+                                                  height: 30,
+                                                  child: IconButton(
+                                                      icon: Icon(
+                                                        Icons
+                                                            .arrow_forward_ios_sharp,
+                                                        size: 18,
+                                                        color: Color.fromRGBO(
+                                                            23, 25, 95, 1),
+                                                      ),
+                                                      onPressed: () {
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder: (ctx) =>
+                                                                    PostDetail(
+                                                                      post: data
+                                                                              .docs[
+                                                                          index],
+                                                                    )));
+                                                      }))
+                                            ],
+                                          )
                                         ],
                                       ),
                                       Text(
@@ -131,8 +179,7 @@ class _PostsState extends State<Posts> {
                                                         r'(\d{1,3})(?=(\d{3})+(?!\d))'),
                                                     (Match m) => '${m[1]},'),
                                         style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(235, 118, 189, 1),
+                                          color: Color.fromRGBO(23, 25, 95, 1),
                                         ),
                                       ),
                                       Text(
@@ -144,8 +191,7 @@ class _PostsState extends State<Posts> {
                                                         r'(\d{1,3})(?=(\d{3})+(?!\d))'),
                                                     (Match m) => '${m[1]},'),
                                         style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(235, 118, 189, 1),
+                                          color: Color.fromRGBO(23, 25, 95, 1),
                                         ),
                                       ),
                                       Text(
@@ -153,8 +199,7 @@ class _PostsState extends State<Posts> {
                                             data.docs[index]['noOfProducts']
                                                 .toString(),
                                         style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(235, 118, 189, 1),
+                                          color: Color.fromRGBO(23, 25, 95, 1),
                                         ),
                                       ),
                                       data.docs[index]['state'] == 0
@@ -162,14 +207,14 @@ class _PostsState extends State<Posts> {
                                               "State: Not Arrived",
                                               style: TextStyle(
                                                 color: Color.fromRGBO(
-                                                    235, 118, 189, 1),
+                                                    23, 25, 95, 1),
                                               ),
                                             )
                                           : Text(
                                               "State: Arrived",
                                               style: TextStyle(
                                                 color: Color.fromRGBO(
-                                                    235, 118, 189, 1),
+                                                    23, 25, 95, 1),
                                               ),
                                             ),
                                       Text(
@@ -177,8 +222,8 @@ class _PostsState extends State<Posts> {
                                               data.docs[index]['sendingDate']
                                                   .toString(),
                                           style: TextStyle(
-                                            color: Color.fromRGBO(
-                                                235, 118, 189, 1),
+                                            color:
+                                                Color.fromRGBO(23, 25, 95, 1),
                                           )),
                                     ],
                                   ),
@@ -228,7 +273,7 @@ class _PostsState extends State<Posts> {
                                           )));
                             },
                             style: NeumorphicStyle(
-                                color: Color.fromRGBO(235, 118, 189, 1),
+                                color: Color.fromRGBO(23, 25, 95, 1),
                                 border: NeumorphicBorder.none()),
                           )),
                     ),

@@ -142,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
     final loginButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 10.0),
       child: RaisedButton(
-        color: Color.fromRGBO(235, 118, 189, 1),
+        color: Color.fromRGBO(23, 25, 95, 1),
         onPressed: () {
           if (forget) {
             passwordReset();
@@ -208,7 +208,7 @@ class _LoginPageState extends State<LoginPage> {
                         tag: "logo",
                         child: Container(
                           height: height * 0.07,
-                          child: Image.asset("images/plogo.png"),
+                          child: Image.asset("images/plogo1.png"),
                         ),
                       ),
                       SizedBox(height: 70.0),
@@ -229,7 +229,7 @@ class _LoginPageState extends State<LoginPage> {
                       Center(
                         child: Text('ONLY UZHII STAFF',
                             style: TextStyle(
-                              color: Color.fromRGBO(235, 118, 189, 1),
+                              color: Color.fromRGBO(23, 25, 95, 1),
                               fontSize: 18,
                             )),
                       ),

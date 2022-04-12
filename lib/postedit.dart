@@ -7,15 +7,15 @@ import 'package:intl/intl.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:uzhii/Posts.dart';
 
-class PostScreen extends StatefulWidget {
+class PostEdit extends StatefulWidget {
   List<String> productString;
-
-  PostScreen({this.productString});
+  DocumentSnapshot parentPost;
+  PostEdit({this.productString, this.parentPost});
   @override
-  _PostScreenState createState() => _PostScreenState();
+  _PostEditState createState() => _PostEditState();
 }
 
-class _PostScreenState extends State<PostScreen> {
+class _PostEditState extends State<PostEdit> {
   bool addPost;
   List<DocumentSnapshot> productsSnapshot;
   List<Map> products = [];
@@ -42,26 +42,25 @@ class _PostScreenState extends State<PostScreen> {
         .collection('products')
         .snapshots()
         .listen((event) {
-      setState(() {
-        productsSnapshot = event.docs;
-        products = new List<Map>(productsSnapshot.length);
-
-        productString = new List<String>(productsSnapshot.length);
-
-        int i = 0;
-
-        productsSnapshot.forEach((element) {
-          products[i] = {
-            "name": element["name"],
-            "price": element["priceP"],
-            "priceI": element["priceI"],
-            "quantity": element["quantity"],
-            "editBook": false,
-            'total': 0
-          };
-          i++;
+      if (mounted) {
+        setState(() {
+          productsSnapshot = event.docs;
+          products = new List<Map>(productsSnapshot.length);
+          productString = new List<String>(productsSnapshot.length);
+          int i = 0;
+          productsSnapshot.forEach((element) {
+            products[i] = {
+              "name": element["name"],
+              "price": element["priceP"],
+              "priceI": element["priceI"],
+              "quantity": element["quantity"],
+              "editBook": false,
+              'total': 0
+            };
+            i++;
+          });
         });
-      });
+      }
     }).onDone(() {
       setState(() {
         products = products;
@@ -122,6 +121,17 @@ class _PostScreenState extends State<PostScreen> {
     }
 
     getItem();
+    print(widget.parentPost['noOfProducts']);
+    widget.parentPost['products'].forEach((v) {
+      print(v);
+      productsSell.add(v);
+    });
+    setState(() {
+      productsSell = productsSell;
+      productQuantity = widget.parentPost['noOfProducts'];
+      totalP = widget.parentPost['totalP'];
+    });
+
     // TODO: implement initState
     super.initState();
   }
@@ -156,7 +166,7 @@ class _PostScreenState extends State<PostScreen> {
                                 top: 8.0,
                               ),
                               child: Text(
-                                "CREATE POST",
+                                "Post: " + widget.parentPost['code'].toString(),
                                 style: TextStyle(
                                   color: Color.fromRGBO(23, 25, 95, 1),
                                   fontSize: 18,
@@ -337,7 +347,6 @@ class _PostScreenState extends State<PostScreen> {
                                                                                 children: [
                                                                                   Text(
                                                                                     productsSell[index]['name'],
-                                                                                    overflow: TextOverflow.ellipsis,
                                                                                     style: TextStyle(color: Color.fromRGBO(23, 25, 95, 1)),
                                                                                   ),
                                                                                   Text(
@@ -396,7 +405,7 @@ class _PostScreenState extends State<PostScreen> {
                                 Container(
                                   padding: EdgeInsets.all(10),
                                   width: width * 0.9,
-                                  height: height * 0.12,
+                                  height: height * 0.11,
                                   child: Column(
                                     children: [
                                       Neumorphic(
@@ -464,36 +473,17 @@ class _PostScreenState extends State<PostScreen> {
                                                           .format(now);
 
                                                   FirebaseFirestore.instance
-                                                      .collection('code')
-                                                      .doc(
-                                                          'oqHMQMLOWT6367Ju1KWA')
-                                                      .update({'code': code});
-
-                                                  FirebaseFirestore.instance
                                                       .collection('posts')
-                                                      .doc()
-                                                      .set({
-                                                    'code': code,
-                                                    'postBenifit': 0,
+                                                      .doc(widget.parentPost.id)
+                                                      .update({
                                                     'products': productsSell,
-                                                    'state': 0,
                                                     'totalI': totalP * curency,
                                                     'totalP': totalP,
                                                     'noOfProducts':
                                                         productQuantity,
-                                                    'sendingDate':
-                                                        formattedDate,
-                                                    'arrivingDate':
-                                                        'Not Arrived',
-                                                    'soldOutDate':
-                                                        "Not Sold-Outed"
                                                   });
 
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (ctx) =>
-                                                              Posts()));
+                                                  Navigator.pop(context);
                                                 },
                                                 child: Neumorphic(
                                                   child: Container(

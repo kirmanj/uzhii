@@ -9,8 +9,8 @@ import 'package:uzhii/Posts.dart';
 
 class SellScreen extends StatefulWidget {
   String postId;
-  List<Map> remainProducts;
-  SellScreen({this.postId, this.remainProducts});
+
+  SellScreen({this.postId});
   @override
   _SellScreenState createState() => _SellScreenState();
 }
@@ -19,10 +19,12 @@ class _SellScreenState extends State<SellScreen> {
   List<DocumentSnapshot> productsSnapshot;
   List<Map> products = [];
   List<Map> productsSell = [];
+  bool noteFlage = true;
   List<String> productString;
   double curency = 0;
   TextEditingController _nameController = TextEditingController();
   TextEditingController _phoneNo1 = TextEditingController();
+  TextEditingController _note = TextEditingController();
   TextEditingController _phoneNo2 = TextEditingController();
   TextEditingController _address = TextEditingController();
   TextEditingController _editPrice = TextEditingController();
@@ -46,21 +48,8 @@ class _SellScreenState extends State<SellScreen> {
 
   String dropdownValue = "0";
 
-  int code;
   double totalPrice = 0;
   double discountPrice = 0;
-  getCode() {
-    FirebaseFirestore.instance
-        .collection('code')
-        .snapshots()
-        .listen((dataSnapshot) {
-      DocumentSnapshot temp = dataSnapshot.docs[0];
-
-      setState(() {
-        code = temp['code'] + 1;
-      });
-    });
-  }
 
   Map post;
   Map sell;
@@ -73,6 +62,7 @@ class _SellScreenState extends State<SellScreen> {
         .snapshots()
         .listen((event) {
       setState(() {
+        code = event.data()['code'];
         post = {
           'code': event.data()['code'],
           'postBenifit': event.data()['code'],
@@ -82,20 +72,19 @@ class _SellScreenState extends State<SellScreen> {
           'totalP': event.data()['totalP'],
           'noOfProducts': event.data()['noOfProducts'],
           'sendingDate': event.data()['sendingDate'],
-          "remainProducts": widget.remainProducts,
           'arrivingDate': event.data()['arrivingDate'],
-          'soldOutDate': event.data()['soldOutDate']
+          'soldOutDate': event.data()['soldOutDate'],
         };
         sell = {
           'products': event.data()['products'],
         };
-        print(sell);
+
         sell['products'].forEach((e) {
           setState(() {
             e["quantity"] = 0;
+            e["code"] = code;
           });
         });
-        print(sell);
       });
     });
   }
@@ -104,7 +93,7 @@ class _SellScreenState extends State<SellScreen> {
   @override
   void initState() {
     getCurency();
-    getCode();
+
     getPost();
     DateTime now = new DateTime.now();
     setState(() {
@@ -114,13 +103,16 @@ class _SellScreenState extends State<SellScreen> {
     super.initState();
   }
 
-  void dispose() {
-    timer.cancel();
-    super.dispose();
-  }
+  // void dispose() {
+  //   timer.cancel();
+  //   super.dispose();
+  // }
 
   bool send = false;
 
+  bool addMore = false;
+  int code;
+  List codes = [];
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -131,15 +123,59 @@ class _SellScreenState extends State<SellScreen> {
           elevation: 0,
           backgroundColor: Colors.white,
           title: Center(
-            child: Text(
-              "SELLING            ",
-              style: TextStyle(
-                  fontSize: 20, color: Color.fromRGBO(235, 118, 189, 1)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  "     SELLING  :  ${addMore ? "" : (code == null) ? "" : code.toString()}",
+                  style: TextStyle(
+                      fontSize: 20, color: Color.fromRGBO(23, 25, 95, 1)),
+                ),
+                Row(
+                  children: [
+                    IconButton(
+                        icon: Icon(Icons.note_add_outlined,
+                            color: Color.fromRGBO(23, 25, 95, 1)),
+                        onPressed: () {
+                          setState(() {
+                            noteFlage = !noteFlage;
+                          });
+                        }),
+                    IconButton(
+                        icon: Icon(Icons.add_circle,
+                            size: 24, color: Color.fromRGBO(23, 25, 95, 1)),
+                        onPressed: () {
+                          FirebaseFirestore.instance
+                              .collection('code')
+                              .get()
+                              .then((value) {
+                            code = value.docs[0].data()['code'];
+                          }).whenComplete(() {
+                            FirebaseFirestore.instance
+                                .collection('posts')
+                                .get()
+                                .then((proVal) {
+                              int lastCode = code - (proVal.docs.length - 1);
+                              codes = [];
+                              for (code; code >= lastCode; code--) {
+                                codes.add(code);
+                              }
+                            }).whenComplete(() {
+                              setState(() {
+                                codes = codes;
+                                addMore = !addMore;
+                              });
+                            });
+                          });
+                        })
+                  ],
+                )
+              ],
             ),
           ),
           leading: IconButton(
               icon: Icon(Icons.arrow_back_ios,
-                  color: Color.fromRGBO(235, 118, 189, 1)),
+                  color: Color.fromRGBO(23, 25, 95, 1)),
               onPressed: () {
                 Navigator.pop(context);
               }),
@@ -170,8 +206,8 @@ class _SellScreenState extends State<SellScreen> {
                                             "Customer Name: " +
                                                 _nameController.text,
                                             style: TextStyle(
-                                              color: Color.fromRGBO(
-                                                  235, 118, 189, 1),
+                                              color:
+                                                  Color.fromRGBO(23, 25, 95, 1),
                                               fontSize: 16,
                                             ),
                                             textAlign: TextAlign.center,
@@ -188,8 +224,8 @@ class _SellScreenState extends State<SellScreen> {
                                           Text(
                                             "Phone Number1: " + _phoneNo1.text,
                                             style: TextStyle(
-                                              color: Color.fromRGBO(
-                                                  235, 118, 189, 1),
+                                              color:
+                                                  Color.fromRGBO(23, 25, 95, 1),
                                               fontSize: 16,
                                             ),
                                             textAlign: TextAlign.center,
@@ -206,8 +242,8 @@ class _SellScreenState extends State<SellScreen> {
                                           Text(
                                             "Phone Number2: " + _phoneNo2.text,
                                             style: TextStyle(
-                                              color: Color.fromRGBO(
-                                                  235, 118, 189, 1),
+                                              color:
+                                                  Color.fromRGBO(23, 25, 95, 1),
                                               fontSize: 16,
                                             ),
                                             textAlign: TextAlign.center,
@@ -224,8 +260,8 @@ class _SellScreenState extends State<SellScreen> {
                                           Text(
                                             "Date: " + formattedDate,
                                             style: TextStyle(
-                                              color: Color.fromRGBO(
-                                                  235, 118, 189, 1),
+                                              color:
+                                                  Color.fromRGBO(23, 25, 95, 1),
                                               fontSize: 16,
                                             ),
                                             textAlign: TextAlign.center,
@@ -246,7 +282,7 @@ class _SellScreenState extends State<SellScreen> {
                                               overflow: TextOverflow.clip,
                                               style: TextStyle(
                                                 color: Color.fromRGBO(
-                                                    235, 118, 189, 1),
+                                                    23, 25, 95, 1),
                                                 fontSize: 16,
                                               ),
                                               textAlign: TextAlign.center,
@@ -260,7 +296,7 @@ class _SellScreenState extends State<SellScreen> {
                                                 overflow: TextOverflow.clip,
                                                 style: TextStyle(
                                                   color: Color.fromRGBO(
-                                                      235, 118, 189, 1),
+                                                      23, 25, 95, 1),
                                                   fontSize: 16,
                                                 ),
                                                 textAlign: TextAlign.center,
@@ -314,11 +350,11 @@ class _SellScreenState extends State<SellScreen> {
                                                             style: TextStyle(
                                                                 color: Color
                                                                     .fromRGBO(
-                                                                        235,
-                                                                        118,
-                                                                        189,
+                                                                        23,
+                                                                        25,
+                                                                        95,
                                                                         1),
-                                                                fontSize: 18,
+                                                                fontSize: 14,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -329,14 +365,14 @@ class _SellScreenState extends State<SellScreen> {
                                                         Container(
                                                           height: 20,
                                                           child: Text(
-                                                            post["products"][
+                                                            sell["products"][
                                                                             index]
                                                                         [
                                                                         "price"]
                                                                     .toStringAsFixed(
                                                                         1) +
                                                                 " Ld     " +
-                                                                post["products"]
+                                                                sell["products"]
                                                                             [
                                                                             index]
                                                                         [
@@ -350,6 +386,12 @@ class _SellScreenState extends State<SellScreen> {
                                                                             index]
                                                                         [
                                                                         "quantity"]
+                                                                    .toString() +
+                                                                "     Code  " +
+                                                                sell["products"]
+                                                                            [
+                                                                            index]
+                                                                        ["code"]
                                                                     .toString(),
                                                             overflow:
                                                                 TextOverflow
@@ -357,9 +399,9 @@ class _SellScreenState extends State<SellScreen> {
                                                             style: TextStyle(
                                                               color: Color
                                                                   .fromRGBO(
-                                                                      235,
-                                                                      118,
-                                                                      189,
+                                                                      23,
+                                                                      25,
+                                                                      95,
                                                                       1),
                                                             ),
                                                             textAlign: TextAlign
@@ -382,8 +424,7 @@ class _SellScreenState extends State<SellScreen> {
                                       child: Text(
                                         "Discount Amount: ",
                                         style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(235, 118, 189, 1),
+                                          color: Color.fromRGBO(23, 25, 95, 1),
                                         ),
                                       ),
                                     ),
@@ -391,7 +432,7 @@ class _SellScreenState extends State<SellScreen> {
                                       value: dropdownValue,
                                       icon: const Icon(
                                         Icons.arrow_drop_down,
-                                        color: Color.fromRGBO(235, 118, 189, 1),
+                                        color: Color.fromRGBO(23, 25, 95, 1),
                                       ),
                                       elevation: 16,
                                       onChanged: (newValue) {
@@ -403,8 +444,6 @@ class _SellScreenState extends State<SellScreen> {
                                                   (int.parse(dropdownValue) /
                                                       100));
                                         });
-
-                                        // print(productsSell[0]['name']);
                                       },
                                       dropdownColor: Colors.white,
                                       items: [
@@ -426,7 +465,7 @@ class _SellScreenState extends State<SellScreen> {
                                             value.toString() + " %",
                                             style: TextStyle(
                                                 color: Color.fromRGBO(
-                                                    235, 118, 189, 1)),
+                                                    23, 25, 95, 1)),
                                           ),
                                         );
                                       }).toList(),
@@ -437,7 +476,7 @@ class _SellScreenState extends State<SellScreen> {
                               Neumorphic(
                                 child: Container(
                                     height: height * 0.1,
-                                    color: Color.fromRGBO(235, 118, 189, 1),
+                                    color: Color.fromRGBO(23, 25, 95, 1),
                                     width: width * 0.8,
                                     child: Row(
                                       mainAxisAlignment:
@@ -457,7 +496,7 @@ class _SellScreenState extends State<SellScreen> {
                                                       "Total: ",
                                                       style: TextStyle(
                                                           color: Colors.white,
-                                                          fontSize: 18,
+                                                          fontSize: 16,
                                                           fontWeight:
                                                               FontWeight.bold),
                                                     ),
@@ -521,7 +560,7 @@ class _SellScreenState extends State<SellScreen> {
                                                                               '${m[1]},') +
                                                                   " IQD",
                                                               style: TextStyle(
-                                                                  fontSize: 18,
+                                                                  fontSize: 16,
                                                                   color: Colors
                                                                       .white,
                                                                   fontWeight:
@@ -539,7 +578,7 @@ class _SellScreenState extends State<SellScreen> {
                                                   "Quantity: ",
                                                   style: TextStyle(
                                                       color: Colors.white,
-                                                      fontSize: 18,
+                                                      fontSize: 16,
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 ),
@@ -547,7 +586,7 @@ class _SellScreenState extends State<SellScreen> {
                                                   productTotal.toString(),
                                                   style: TextStyle(
                                                       color: Colors.white,
-                                                      fontSize: 18,
+                                                      fontSize: 16,
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 )
@@ -631,8 +670,6 @@ class _SellScreenState extends State<SellScreen> {
                                                   finalTotal = discountPrice;
                                                 }
 
-                                                print(post['code']);
-
                                                 FirebaseFirestore.instance
                                                     .collection('posts')
                                                     .where('code',
@@ -678,6 +715,7 @@ class _SellScreenState extends State<SellScreen> {
                                                     'productSell': sellingP,
                                                     'totalCI': totalPrice,
                                                     'totalDis': discountPrice,
+                                                    'note': _note.text,
                                                     'totalBenifit':
                                                         totalbenifit,
                                                     'totalBuy': newTotalB,
@@ -690,7 +728,6 @@ class _SellScreenState extends State<SellScreen> {
                                                         productTotal,
                                                     'sellingDate':
                                                         formattedDate,
-                                                    'code': post['code']
                                                   });
 
                                                   Navigator.push(
@@ -725,8 +762,8 @@ class _SellScreenState extends State<SellScreen> {
                                           NeumorphicText(
                                             "Customer Name",
                                             style: NeumorphicStyle(
-                                              color: Color.fromRGBO(
-                                                  235, 118, 189, 1),
+                                              color:
+                                                  Color.fromRGBO(23, 25, 95, 1),
                                             ),
                                           ),
                                           Container(
@@ -741,7 +778,7 @@ class _SellScreenState extends State<SellScreen> {
                                                   hintText: 'Name',
                                                   hintStyle: TextStyle(
                                                       color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
+                                                          23, 25, 95, 1),
                                                       fontSize: 14),
                                                   contentPadding:
                                                       EdgeInsets.fromLTRB(20.0,
@@ -761,8 +798,8 @@ class _SellScreenState extends State<SellScreen> {
                                           NeumorphicText(
                                             "Phone Number 1",
                                             style: NeumorphicStyle(
-                                              color: Color.fromRGBO(
-                                                  235, 118, 189, 1),
+                                              color:
+                                                  Color.fromRGBO(23, 25, 95, 1),
                                             ),
                                           ),
                                           Container(
@@ -777,7 +814,7 @@ class _SellScreenState extends State<SellScreen> {
                                                   hintText: 'Phone Number',
                                                   hintStyle: TextStyle(
                                                       color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
+                                                          23, 25, 95, 1),
                                                       fontSize: 14),
                                                   contentPadding:
                                                       EdgeInsets.fromLTRB(20.0,
@@ -797,8 +834,8 @@ class _SellScreenState extends State<SellScreen> {
                                           NeumorphicText(
                                             "Phone Number 2",
                                             style: NeumorphicStyle(
-                                              color: Color.fromRGBO(
-                                                  235, 118, 189, 1),
+                                              color:
+                                                  Color.fromRGBO(23, 25, 95, 1),
                                             ),
                                           ),
                                           Container(
@@ -813,7 +850,7 @@ class _SellScreenState extends State<SellScreen> {
                                                   hintText: 'Phone Number',
                                                   hintStyle: TextStyle(
                                                       color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
+                                                          23, 25, 95, 1),
                                                       fontSize: 14),
                                                   contentPadding:
                                                       EdgeInsets.fromLTRB(20.0,
@@ -833,8 +870,8 @@ class _SellScreenState extends State<SellScreen> {
                                           NeumorphicText(
                                             "Customer Adress",
                                             style: NeumorphicStyle(
-                                              color: Color.fromRGBO(
-                                                  235, 118, 189, 1),
+                                              color:
+                                                  Color.fromRGBO(23, 25, 95, 1),
                                             ),
                                           ),
                                           Container(
@@ -849,7 +886,7 @@ class _SellScreenState extends State<SellScreen> {
                                                   hintText: 'Address',
                                                   hintStyle: TextStyle(
                                                       color: Color.fromRGBO(
-                                                          235, 118, 189, 1),
+                                                          23, 25, 95, 1),
                                                       fontSize: 14),
                                                   contentPadding:
                                                       EdgeInsets.fromLTRB(20.0,
@@ -924,9 +961,9 @@ class _SellScreenState extends State<SellScreen> {
                                                                           'Price',
                                                                       hintStyle: TextStyle(
                                                                           color: Color.fromRGBO(
-                                                                              235,
-                                                                              118,
-                                                                              189,
+                                                                              23,
+                                                                              25,
+                                                                              95,
                                                                               1),
                                                                           fontSize:
                                                                               14),
@@ -962,12 +999,12 @@ class _SellScreenState extends State<SellScreen> {
                                                                             TextOverflow.clip,
                                                                         style: TextStyle(
                                                                             color: Color.fromRGBO(
-                                                                                235,
-                                                                                118,
-                                                                                189,
+                                                                                23,
+                                                                                25,
+                                                                                95,
                                                                                 1),
                                                                             fontSize:
-                                                                                18,
+                                                                                16,
                                                                             fontWeight:
                                                                                 FontWeight.bold),
                                                                         textAlign:
@@ -984,17 +1021,15 @@ class _SellScreenState extends State<SellScreen> {
                                                                         post["products"][index]["price"].toStringAsFixed(1) +
                                                                             " Ld     " +
                                                                             post["products"][index]["priceI"].toStringAsFixed(1) +
-                                                                            "  IQD  " +
-                                                                            "  in store  " +
-                                                                            post["remainProducts"][index]['quantity'].toString(),
+                                                                            "  IQD  ",
                                                                         overflow:
                                                                             TextOverflow.clip,
                                                                         style:
                                                                             TextStyle(
                                                                           color: Color.fromRGBO(
-                                                                              235,
-                                                                              118,
-                                                                              189,
+                                                                              23,
+                                                                              25,
+                                                                              95,
                                                                               1),
                                                                         ),
                                                                         textAlign:
@@ -1022,8 +1057,6 @@ class _SellScreenState extends State<SellScreen> {
                                                                         if (_editPrice
                                                                             .text
                                                                             .isEmpty) {
-                                                                          print(
-                                                                              "yes");
                                                                         } else {
                                                                           setState(
                                                                               () {
@@ -1049,9 +1082,9 @@ class _SellScreenState extends State<SellScreen> {
                                                                           size:
                                                                               20,
                                                                           color: Color.fromRGBO(
-                                                                              235,
-                                                                              118,
-                                                                              189,
+                                                                              23,
+                                                                              25,
+                                                                              95,
                                                                               1),
                                                                         ),
                                                                       ),
@@ -1074,9 +1107,9 @@ class _SellScreenState extends State<SellScreen> {
                                                                           size:
                                                                               16,
                                                                           color: Color.fromRGBO(
-                                                                              235,
-                                                                              118,
-                                                                              189,
+                                                                              23,
+                                                                              25,
+                                                                              95,
                                                                               1),
                                                                         ),
                                                                       ),
@@ -1093,6 +1126,7 @@ class _SellScreenState extends State<SellScreen> {
                                                                               index]
                                                                           [
                                                                           "quantity"]++;
+
                                                                       sell["products"]
                                                                               [
                                                                               index]
@@ -1104,16 +1138,10 @@ class _SellScreenState extends State<SellScreen> {
                                                                           temp1 =
                                                                           double.parse(
                                                                               post["products"][index]['priceI'].toString());
-                                                                      print(
-                                                                          totalPrice);
-                                                                      print(
-                                                                          temp1);
 
                                                                       totalPrice =
                                                                           totalPrice -
                                                                               temp1;
-                                                                      print(
-                                                                          totalPrice);
                                                                     });
                                                                   }
                                                                 },
@@ -1124,9 +1152,9 @@ class _SellScreenState extends State<SellScreen> {
                                                                         .remove,
                                                                     color: Color
                                                                         .fromRGBO(
-                                                                            235,
-                                                                            118,
-                                                                            189,
+                                                                            23,
+                                                                            25,
+                                                                            95,
                                                                             1),
                                                                   ),
                                                                 ),
@@ -1147,11 +1175,20 @@ class _SellScreenState extends State<SellScreen> {
                                                                               index]
                                                                           [
                                                                           "quantity"]--;
-                                                                      sell["products"]
+
+                                                                      for (int i =
+                                                                              0;
+                                                                          i < sell["products"].length;
+                                                                          i++) {
+                                                                        if ((sell["products"][i]['name'] == post["products"][index]["name"]) &&
+                                                                            (sell["products"][i]['code'] ==
+                                                                                code)) {
+                                                                          sell["products"][i]
                                                                               [
-                                                                              index]
-                                                                          [
-                                                                          "quantity"]++;
+                                                                              "quantity"]++;
+                                                                        }
+                                                                      }
+
                                                                       productTotal++;
                                                                       double
                                                                           temp =
@@ -1170,9 +1207,9 @@ class _SellScreenState extends State<SellScreen> {
                                                                     Icons.add,
                                                                     color: Color
                                                                         .fromRGBO(
-                                                                            235,
-                                                                            118,
-                                                                            189,
+                                                                            23,
+                                                                            25,
+                                                                            95,
                                                                             1),
                                                                   ),
                                                                 ),
@@ -1190,7 +1227,7 @@ class _SellScreenState extends State<SellScreen> {
                                 Neumorphic(
                                   child: Container(
                                       height: height * 0.08,
-                                      color: Color.fromRGBO(235, 118, 189, 1),
+                                      color: Color.fromRGBO(23, 25, 95, 1),
                                       width: width * 0.8,
                                       child: Row(
                                         mainAxisAlignment:
@@ -1286,6 +1323,240 @@ class _SellScreenState extends State<SellScreen> {
                                       )),
                                 ),
                               ],
+                            ),
+                          ),
+                        ),
+                  noteFlage
+                      ? Container()
+                      : Container(
+                          height: height * 0.9,
+                          width: width,
+                          color: Color.fromRGBO(23, 25, 95, 0.8),
+                          child: Center(
+                            child: Neumorphic(
+                              style: NeumorphicStyle(color: Colors.white),
+                              child: Container(
+                                  height: height * 0.5,
+                                  width: width * 0.8,
+                                  color: Colors.white,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Write Note",
+                                        style: TextStyle(
+                                            color:
+                                                Color.fromRGBO(23, 25, 95, 1),
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      SizedBox(
+                                        height: height * 0.04,
+                                      ),
+                                      Container(
+                                        width: width * 0.7,
+                                        color: Colors.white,
+                                        child: TextFormField(
+                                          style: TextStyle(
+                                            color:
+                                                Color.fromRGBO(23, 25, 95, 1),
+                                          ),
+                                          controller: _note,
+                                          keyboardType: TextInputType.multiline,
+                                          maxLines: 4,
+                                          autofocus: false,
+                                          decoration: InputDecoration(
+                                              labelText: "Note",
+                                              labelStyle: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    23, 25, 95, 1),
+                                              ),
+                                              hintText: 'Note',
+                                              hintStyle: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      23, 25, 95, 1)),
+                                              contentPadding:
+                                                  EdgeInsets.fromLTRB(
+                                                      20.0, 10.0, 20.0, 10.0),
+                                              enabledBorder:
+                                                  const OutlineInputBorder(
+                                                borderSide: const BorderSide(
+                                                    color: Color.fromRGBO(
+                                                        23, 25, 95, 1),
+                                                    width: 0.0),
+                                              )),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: height * 0.04,
+                                      ),
+                                      NeumorphicButton(
+                                          child: Text(
+                                            "Done",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              noteFlage = !noteFlage;
+                                            });
+                                          },
+                                          style: NeumorphicStyle(
+                                            color:
+                                                Color.fromRGBO(23, 25, 95, 1),
+                                          ))
+                                    ],
+                                  )),
+                            ),
+                          ),
+                        ),
+                  !addMore
+                      ? Container()
+                      : Container(
+                          height: height * 0.9,
+                          width: width,
+                          color: Color.fromRGBO(23, 25, 95, 0.8),
+                          child: Center(
+                            child: Neumorphic(
+                              style: NeumorphicStyle(color: Colors.white),
+                              child: Container(
+                                  height: height * 0.7,
+                                  width: width * 0.8,
+                                  color: Colors.white,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Choose Post Code",
+                                        style: TextStyle(
+                                            color:
+                                                Color.fromRGBO(23, 25, 95, 1),
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      SizedBox(
+                                        height: height * 0.04,
+                                      ),
+                                      Container(
+                                        width: width * 0.7,
+                                        color: Colors.white,
+                                        height: height * 0.5,
+                                        child: GridView.builder(
+                                          gridDelegate:
+                                              SliverGridDelegateWithFixedCrossAxisCount(
+                                                  crossAxisCount: 3),
+                                          itemCount: codes.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: InkWell(
+                                                onTap: () {
+                                                  FirebaseFirestore.instance
+                                                      .collection("posts")
+                                                        ..where('code',
+                                                                isEqualTo:
+                                                                    codes[
+                                                                        index])
+                                                            .snapshots()
+                                                            .listen((event) {
+                                                          setState(() {
+                                                            code = codes[index];
+                                                            post = {
+                                                              'code':
+                                                                  event.docs[0]
+                                                                      ['code'],
+                                                              'postBenifit':
+                                                                  event.docs[0]
+                                                                      ['code'],
+                                                              'products': event
+                                                                      .docs[0]
+                                                                  ['products'],
+                                                              'state':
+                                                                  event.docs[0]
+                                                                      ['state'],
+                                                              'totalI': event
+                                                                      .docs[0]
+                                                                  ['totalI'],
+                                                              'totalP': event
+                                                                      .docs[0]
+                                                                  ['totalP'],
+                                                              'noOfProducts': event
+                                                                      .docs[0][
+                                                                  'noOfProducts'],
+                                                              'sendingDate': event
+                                                                      .docs[0][
+                                                                  'sendingDate'],
+                                                              'arrivingDate': event
+                                                                      .docs[0][
+                                                                  'arrivingDate'],
+                                                              'soldOutDate': event
+                                                                      .docs[0][
+                                                                  'soldOutDate']
+                                                            };
+
+                                                            Map<dynamic,
+                                                                    dynamic>
+                                                                tempS = {
+                                                              'products': event
+                                                                      .docs[0]
+                                                                  ['products'],
+                                                            };
+
+                                                            tempS['products']
+                                                                .forEach((e) {
+                                                              setState(() {
+                                                                e["quantity"] =
+                                                                    0;
+                                                                e["code"] =
+                                                                    code;
+                                                                sell['products']
+                                                                    .add(e);
+                                                              });
+                                                            });
+
+                                                            addMore = !addMore;
+                                                            !send
+                                                                ? send
+                                                                : send = !send;
+                                                          });
+                                                        });
+                                                },
+                                                child: Container(
+                                                  child: Neumorphic(
+                                                    child: Center(
+                                                      child: Text(codes[index]
+                                                          .toString()),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: height * 0.04,
+                                      ),
+                                      NeumorphicButton(
+                                          child: Icon(
+                                            Icons.close,
+                                            color: Colors.white,
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              addMore = !addMore;
+                                            });
+                                          },
+                                          style: NeumorphicStyle(
+                                            color:
+                                                Color.fromRGBO(23, 25, 95, 1),
+                                          ))
+                                    ],
+                                  )),
                             ),
                           ),
                         ),
