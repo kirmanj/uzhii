@@ -41,6 +41,9 @@ dependencies:
   intl: ^0.17.0
   charts_flutter: ^0.11.0 
   bottom_bar: ^1.3.0+1
+  countup: ^0.1.4
+  syncfusion_flutter_charts: ^20.1.50
+  date_util: ^0.1.4
   
 
   
@@ -48,7 +51,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-# For information on the generic Dart part of this file, see the
+# For information on the generic Dart part of thi s file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
@@ -60,8 +63,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - images/
+  #assets:
+  # - images/
  
 
   # An image asset can refer to one or more resolution-specific "variants", see

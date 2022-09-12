@@ -1,41 +1,95 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:uzhii/main.dart';
 
 class Products extends StatefulWidget {
   @override
-  _ProductsState createState() => _ProductsState();
+  State<Products> createState() => _ProductsState();
 }
 
 class _ProductsState extends State<Products> {
-  bool add = false;
+  List<Map> products = [];
+  int total = 0;
 
-  TextEditingController _name = new TextEditingController();
-  TextEditingController _priceP = new TextEditingController();
-  double _priceI;
-  int _quantity;
-  double curency;
+  Map most;
+  Map least;
 
-  double reciprocal(double d) => d / 1;
-  getCurency() {
-    print("object");
+  bool flage = false;
+  getProduct() {
     FirebaseFirestore.instance
-        .collection('curency')
+        .collection('menuProducts')
         .snapshots()
-        .listen((dataSnapshot) {
-      DocumentSnapshot temp = dataSnapshot.docs[0];
-      print(temp['euro'].toString());
-      print("curency");
-      setState(() {
-        curency = reciprocal(temp['euro'].toDouble());
-        print(curency);
+        .listen((event) {
+      event.docs.forEach(
+        (element) {
+          setState(() {
+            products.add({
+              'English': element['English'],
+              'total': 0,
+              "quantities": 0,
+              'id': element.id,
+              'image': element['image']
+            });
+          });
+          if (products.length == event.docs.length) {
+            print("DOneeeeeeeeeee");
+            calculateProduct();
+          }
+        },
+      );
+    }).onDone(() {});
+  }
+
+  calculateProduct() {
+    FirebaseFirestore.instance.collection('orders').snapshots().listen((event) {
+      event.docs.forEach((element) {
+        for (int i = 0; i < element.data()['items'].length; i++) {
+          for (int j = 0; j < products.length; j++) {
+            if (element.data()['items'][i]['English'] ==
+                products[j]['English']) {
+              setState(() {
+                products[j]['total'] +=
+                    int.parse(element.data()['items'][i]['price'].toString());
+                total +=
+                    int.parse(element.data()['items'][i]['price'].toString());
+                products[j]['quantities'] +=
+                    element.data()['items'][i]['quantity'];
+              });
+              break;
+            }
+          }
+        }
+      });
+
+      int tempMax = 0;
+      int tempMin = total;
+      products.forEach((element) {
+        if (element['total'] > tempMax) {
+          tempMax = element['total'];
+          setState(() {
+            most = element;
+          });
+        }
+
+        if (element['total'] < tempMin) {
+          tempMin = element['total'];
+          setState(() {
+            least = element;
+          });
+        }
+        print("least");
+        print(least);
       });
     });
   }
 
   @override
   void initState() {
+    getProduct();
+
     // TODO: implement initState
     super.initState();
   }
@@ -47,349 +101,217 @@ class _ProductsState extends State<Products> {
 
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Stack(
+        child: Container(
+          width: width,
+          height: height,
+          child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 8.0,
-                    ),
-                    child: Text(
-                      "PRODUCTS",
-                      style: TextStyle(
-                        color: Color.fromRGBO(23, 25, 95, 1),
-                        fontSize: 18,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                  margin: EdgeInsets.only(top: height * 0.04),
-                  height: height * 0.86,
-                  child: StreamBuilder(
-                    stream: FirebaseFirestore.instance
-                        .collection('products')
-                        .orderBy("name")
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      QuerySnapshot data = snapshot.data;
-                      print(data);
-                      if (data == null)
-                        return Center(
-                          child: Container(
-                            width: 25,
-                            height: 25,
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                Color.fromRGBO(23, 25, 95, 1),
+              Expanded(
+                  flex: 1,
+                  child: Container(
+                    width: width * 0.9,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Neumorphic(
+                            child: Container(
+                              margin: EdgeInsets.only(left: 5.0),
+                              width: 35,
+                              height: 35,
+                              child: Center(
+                                child: Icon(
+                                  Icons.arrow_back_ios,
+                                  size: 16,
+                                ),
                               ),
                             ),
                           ),
-                        );
-                      return Padding(
-                        padding: EdgeInsets.only(right: width * 0.0),
-                        child: ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            itemCount: data.docs.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Container(
-                                height: height * 0.1,
-                                width: width * 0.95,
-                                padding: EdgeInsets.only(
-                                    left: width * 0.02,
-                                    bottom: height * 0.01,
-                                    right: width * 0.02),
-                                child: Neumorphic(
-                                  style: NeumorphicStyle(
-                                    color: Colors.white,
-                                  ),
-                                  child: Center(
+                        ),
+                        Row(
+                          children: [
+                            NeumorphicText(
+                              "Total Income : ",
+                              textStyle: NeumorphicTextStyle(fontSize: 16),
+                              style: NeumorphicStyle(color: Colors.black),
+                            ),
+                            Countup(
+                                begin: 0,
+                                end: total.toDouble(),
+                                duration: Duration(seconds: 3),
+                                separator: ',',
+                                suffix: "  IQD",
+                                style: TextStyle(
+                                  fontSize: 13,
+                                ))
+                          ],
+                        ),
+                      ],
+                    ),
+                  )),
+              Expanded(
+                  flex: 14,
+                  child: Center(
+                    child: products == []
+                        ? Container()
+                        : Container(
+                            child: GridView.builder(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2),
+                              itemCount: products.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Neumorphic(
                                     child: Container(
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceAround,
                                         children: [
-                                          Text(
-                                            data.docs[index]["name"],
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                                color: Color.fromRGBO(
-                                                    23, 25, 95, 1),
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold),
-                                            textAlign: TextAlign.center,
+                                          Container(
+                                            height: height * 0.15,
+                                            child: Image.network(
+                                                products[index]['image'],
+                                                fit: BoxFit.cover),
                                           ),
-                                          Text(
-                                            data.docs[index]["priceP"]
+                                          NeumorphicText(
+                                            products[index]['English'],
+                                            textStyle: NeumorphicTextStyle(
+                                                fontSize: 12),
+                                            style: NeumorphicStyle(
+                                                color: Colors.black),
+                                          ),
+                                          NeumorphicText(
+                                            products[index]['total']
                                                     .toStringAsFixed(1) +
-                                                " Ld     " +
-                                                data.docs[index]["priceI"]
-                                                    .toStringAsFixed(1) +
-                                                "  IQD  " +
-                                                "  Quantity  " +
-                                                data.docs[index]["quantity"]
-                                                    .toString(),
-                                            style: TextStyle(
-                                              color:
-                                                  Color.fromRGBO(23, 25, 95, 1),
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          )
+                                                "  IQD",
+                                            textStyle: NeumorphicTextStyle(
+                                                fontSize: 12),
+                                            style: NeumorphicStyle(
+                                                color: Colors.black),
+                                          ),
+                                          NeumorphicText(
+                                            products[index]['quantities']
+                                                    .toString() +
+                                                "  Qtd",
+                                            textStyle: NeumorphicTextStyle(
+                                                fontSize: 12),
+                                            style: NeumorphicStyle(
+                                                color: Colors.black),
+                                          ),
                                         ],
                                       ),
                                     ),
                                   ),
-                                ),
-                              );
-                            }),
-                      );
-                    },
+                                );
+                              },
+                            ),
+                          ),
                   )),
-              (add == null)
-                  ? Container()
-                  : (add || userRole != 1)
-                      ? Container()
-                      : Positioned(
-                          bottom: height * 0.05,
-                          right: width * 0.4,
-                          child: Container(
-                              height: height * 0.05,
-                              width: width * 0.2,
-                              child: NeumorphicButton(
-                                child: Center(
-                                  child: Icon(
-                                    Icons.add,
-                                    color: Colors.white,
-                                  ),
+              Expanded(
+                  flex: 2,
+                  child: Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Neumorphic(
+                            style:
+                                NeumorphicStyle(shadowDarkColor: Colors.green),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Container(
+                                  height: height * 0.07,
+                                  width: width * 0.17,
+                                  child: Image.network(most['image'],
+                                      fit: BoxFit.cover),
                                 ),
-                                onPressed: () {
-                                  getCurency();
-                                  setState(() {
-                                    add = !add;
-                                  });
-                                },
-                                style: NeumorphicStyle(
-                                    color: Color.fromRGBO(23, 25, 95, 1),
-                                    border: NeumorphicBorder.none()),
-                              )),
-                        ),
-              (add == null)
-                  ? Container()
-                  : (!add)
-                      ? Container()
-                      : Container(
-                          height: height * 0.9,
-                          width: width,
-                          color: Color.fromRGBO(23, 25, 95, 0.1),
-                          child: Center(
-                            child: Neumorphic(
-                              style: NeumorphicStyle(color: Colors.white),
-                              child: Container(
-                                  height: height * 0.5,
-                                  width: width * 0.8,
-                                  color: Colors.white,
+                                Padding(
+                                  padding: const EdgeInsets.all(5.0),
                                   child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
                                     children: [
-                                      Text(
-                                        "ADD PRODUCT",
-                                        style: TextStyle(
-                                            color:
-                                                Color.fromRGBO(23, 25, 95, 1),
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold),
-                                        textAlign: TextAlign.center,
+                                      NeumorphicText(
+                                        'Most Sales',
+                                        textStyle:
+                                            NeumorphicTextStyle(fontSize: 12),
+                                        style: NeumorphicStyle(
+                                            color: Colors.black),
                                       ),
-                                      SizedBox(
-                                        height: height * 0.04,
+                                      NeumorphicText(
+                                        most['English'],
+                                        textStyle:
+                                            NeumorphicTextStyle(fontSize: 12),
+                                        style: NeumorphicStyle(
+                                            color: Colors.black),
                                       ),
-                                      Container(
-                                        width: width * 0.7,
-                                        color: Colors.white,
-                                        child: TextFormField(
+                                      Countup(
+                                          begin: 0,
+                                          end: most['total'].toDouble(),
+                                          duration: Duration(seconds: 3),
+                                          separator: ',',
+                                          suffix: "  IQD",
                                           style: TextStyle(
-                                            color:
-                                                Color.fromRGBO(23, 25, 95, 1),
-                                          ),
-                                          validator: (val) {
-                                            if (val.isEmpty) {
-                                              return 'Should not be empty';
-                                            } else {
-                                              return null;
-                                            }
-                                          },
-                                          controller: _name,
-                                          keyboardType: TextInputType.text,
-                                          autofocus: false,
-                                          decoration: InputDecoration(
-                                              labelText: "Name",
-                                              labelStyle: TextStyle(
-                                                color: Color.fromRGBO(
-                                                    23, 25, 95, 1),
-                                              ),
-                                              hintText: 'Name',
-                                              hintStyle: TextStyle(
-                                                  color: Color.fromRGBO(
-                                                      23, 25, 95, 1)),
-                                              contentPadding:
-                                                  EdgeInsets.fromLTRB(
-                                                      20.0, 10.0, 20.0, 10.0),
-                                              enabledBorder:
-                                                  const OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                    color: Color.fromRGBO(
-                                                        23, 25, 95, 1),
-                                                    width: 0.0),
-                                              )),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: height * 0.01,
-                                      ),
-                                      Container(
-                                        width: width * 0.7,
-                                        color: Colors.white,
-                                        child: TextFormField(
-                                          style: TextStyle(
-                                            color:
-                                                Color.fromRGBO(23, 25, 95, 1),
-                                          ),
-                                          onChanged: (text) {
-                                            print('First text field: $text');
-                                            print(curency);
-                                            print(_priceP.value.text);
-                                            setState(() {
-                                              _priceI = curency *
-                                                  double.parse(
-                                                      _priceP.value.text);
-                                            });
-                                            print(_priceI);
-                                          },
-                                          validator: (val) {
-                                            if (val.isEmpty) {
-                                              return 'Should not be empty';
-                                            } else {
-                                              return null;
-                                            }
-                                          },
-                                          controller: _priceP,
-                                          autofocus: false,
-                                          decoration: InputDecoration(
-                                              labelText: "Price",
-                                              labelStyle: TextStyle(
-                                                color: Color.fromRGBO(
-                                                    23, 25, 95, 1),
-                                              ),
-                                              hintText: 'Price',
-                                              hintStyle: TextStyle(
-                                                  color: Color.fromRGBO(
-                                                      23, 25, 95, 1)),
-                                              contentPadding:
-                                                  EdgeInsets.fromLTRB(
-                                                      20.0, 10.0, 20.0, 10.0),
-                                              enabledBorder:
-                                                  const OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                    color: Color.fromRGBO(
-                                                        23, 25, 95, 1),
-                                                    width: 0.0),
-                                              )),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: height * 0.01,
-                                      ),
-                                      Neumorphic(
-                                        child: Container(
-                                            width: width * 0.4,
-                                            height: height * 0.05,
-                                            child: Center(
-                                              child: Text(
-                                                _priceI == null
-                                                    ? "0"
-                                                    : "" +
-                                                        _priceI.toStringAsFixed(
-                                                            1) +
-                                                        " IQD",
-                                                style: TextStyle(
-                                                    color: Color.fromRGBO(
-                                                        23, 25, 95, 1)),
-                                              ),
-                                            )),
-                                      ),
-                                      SizedBox(
-                                        height: height * 0.03,
-                                      ),
-                                      NeumorphicButton(
-                                          child: Text(
-                                            "ADD",
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          ),
-                                          onPressed: () {
-                                            FirebaseFirestore.instance
-                                                .collection('products')
-                                                .doc()
-                                                .set({
-                                              "name": _name.text,
-                                              "priceP":
-                                                  double.parse(_priceP.text),
-                                              "priceI": num.parse(
-                                                  _priceI.toStringAsFixed(2)),
-                                              "quantity": 0,
-                                              "sellI": 0
-                                            });
-
-                                            setState(() {
-                                              _priceP = TextEditingController();
-                                              _name = TextEditingController();
-                                              _priceI = 0;
-                                            });
-                                          },
-                                          style: NeumorphicStyle(
-                                            color:
-                                                Color.fromRGBO(23, 25, 95, 1),
+                                            fontSize: 12,
                                           ))
                                     ],
-                                  )),
+                                  ),
+                                )
+                              ],
                             ),
                           ),
                         ),
-              (add == null)
-                  ? Container()
-                  : (!add)
-                      ? Container()
-                      : Positioned(
-                          bottom: height * 0.06,
-                          right: width * 0.4,
-                          child: Container(
-                              height: height * 0.05,
-                              width: width * 0.2,
-                              child: NeumorphicButton(
-                                child: Center(
-                                  child: Icon(
-                                    Icons.close,
-                                    color: Color.fromRGBO(23, 25, 95, 1),
-                                  ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Neumorphic(
+                            style: NeumorphicStyle(shadowDarkColor: Colors.red),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Container(
+                                  height: height * 0.07,
+                                  width: width * 0.17,
+                                  child: Image.network(least['image'],
+                                      fit: BoxFit.cover),
                                 ),
-                                onPressed: () {
-                                  setState(() {
-                                    add = !add;
-                                    _priceP = TextEditingController();
-                                    _name = TextEditingController();
-                                    _priceI = 0;
-                                  });
-                                },
-                                style: NeumorphicStyle(
-                                    color: Colors.white,
-                                    border: NeumorphicBorder.none()),
-                              )),
-                        ),
+                                Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      NeumorphicText(
+                                        'Least Sales',
+                                        textStyle:
+                                            NeumorphicTextStyle(fontSize: 12),
+                                        style: NeumorphicStyle(
+                                            color: Colors.black),
+                                      ),
+                                      NeumorphicText(
+                                        least['English'],
+                                        textStyle:
+                                            NeumorphicTextStyle(fontSize: 12),
+                                        style: NeumorphicStyle(
+                                            color: Colors.black),
+                                      ),
+
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ))
             ],
           ),
         ),
